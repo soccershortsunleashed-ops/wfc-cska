@@ -10,28 +10,28 @@ export function SocialDock() {
     {
       title: "VK",
       icon: (
-        <FaVk className="h-full w-full text-[var(--cska-blue)] dark:text-neutral-300 transition-colors" />
+        <FaVk className="h-full w-full text-white transition-colors" />
       ),
       href: "https://vk.com/wfccska",
     },
     {
       title: "Twitter",
       icon: (
-        <Twitter className="h-full w-full text-[var(--cska-blue)] dark:text-neutral-300 transition-colors" />
+        <Twitter className="h-full w-full text-white transition-colors" />
       ),
       href: "https://twitter.com/wfccska",
     },
     {
       title: "YouTube",
       icon: (
-        <Youtube className="h-full w-full text-[var(--cska-red)] dark:text-neutral-300 transition-colors" />
+        <Youtube className="h-full w-full text-white transition-colors" />
       ),
       href: "https://www.youtube.com/channel/UCToNhi_LVB-cQzDZCLgl57Q",
     },
     {
       title: "Telegram",
       icon: (
-        <FaTelegram className="h-full w-full text-[var(--cska-blue)] dark:text-neutral-300 transition-colors" />
+        <FaTelegram className="h-full w-full text-white transition-colors" />
       ),
       href: "https://t.me/wfc_cska",
     },

@@ -147,14 +147,16 @@ export function Header() {
 
         {/* Desktop Navigation and Social Links */}
         <div className="hidden lg:flex items-center gap-6">
-          <NavigationMenu className="[&_button]:text-white [&_button]:hover:text-white/80 [&_a]:text-white [&_a]:hover:text-white/80">
-            <NavigationMenuList>
+          <NavigationMenu>
+            <NavigationMenuList className="[&_button]:text-white [&_button]:hover:bg-white/10 [&_button]:data-[state=open]:bg-white/10 [&_a]:text-white [&_a]:hover:bg-white/10">
               {navigationItems.map((item) => (
                 <NavigationMenuItem key={item.href}>
                   {item.items ? (
                     <>
-                      <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
-                      <NavigationMenuContent>
+                      <NavigationMenuTrigger className="bg-transparent hover:bg-white/10 data-[state=open]:bg-white/10 text-white">
+                        {item.title}
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent className="bg-[#0033A0] border-white/20">
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
                           {item.items.map((subItem) => (
                             <li key={subItem.href}>
@@ -162,13 +164,13 @@ export function Header() {
                                 <Link
                                   href={subItem.href}
                                   className={cn(
-                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-white/10 text-white"
                                   )}
                                 >
                                   <div className="text-sm font-medium leading-none">
                                     {subItem.title}
                                   </div>
-                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                  <p className="line-clamp-2 text-sm leading-snug text-white/70">
                                     {subItem.description}
                                   </p>
                                 </Link>
@@ -180,7 +182,7 @@ export function Header() {
                     </>
                   ) : (
                     <NavigationMenuLink asChild>
-                      <Link href={item.href} className={navigationMenuTriggerStyle()}>
+                      <Link href={item.href} className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-white/10 text-white")}>
                         {item.title}
                       </Link>
                     </NavigationMenuLink>
