@@ -51,108 +51,109 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
   const isSingleMatch = matchCount === 1
 
   return (
-    <section className="py-16 md:py-24 bg-muted/30">
+    <section className="py-12 md:py-16 bg-muted/30">
       <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Матчи</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-2">Матчи</h2>
+          <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
             Следите за расписанием и результатами наших матчей
           </p>
         </div>
 
-        <div className={`grid gap-6 ${isSingleMatch ? 'max-w-2xl' : 'md:grid-cols-2 max-w-5xl'} mx-auto`}>
+        <div className={`grid gap-6 ${isSingleMatch ? 'max-w-lg' : 'md:grid-cols-2 max-w-4xl'} mx-auto`}>
           {/* Upcoming Match */}
           {upcomingMatch && (
-            <Card className="overflow-hidden border-2 border-hover gpu-accelerated">
-                <CardHeader className="bg-gradient-to-br from-[var(--cska-blue)] to-[var(--cska-blue)]/80 text-white pb-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <Badge variant="secondary" className="bg-white/20 text-white hover:bg-white/30">
+            <Card className="overflow-hidden border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 gpu-accelerated">
+                <CardHeader className="bg-gradient-to-br from-[var(--cska-blue)] to-[var(--cska-blue)]/80 text-white pb-4">
+                  <div className="flex items-center justify-between">
+                    <Badge variant="secondary" className="bg-white/20 text-white hover:bg-white/30 text-xs">
                       Ближайший матч
                     </Badge>
                     <div className="text-right">
-                      <div className="text-2xl font-bold">
+                      <div className="text-lg font-bold">
                         {formatShortDate(upcomingMatch.matchDate)}
                       </div>
                     </div>
                   </div>
                 </CardHeader>
 
-                <CardContent className="pt-8 pb-6">
+                <CardContent className="pt-6 pb-4">
                   {/* Teams */}
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between mb-4">
                     {/* Home Team - CSKA */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-3 overflow-hidden relative">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
                         {upcomingMatch.cskaLogoUrl ? (
                           <Image
                             {...getImageProps(upcomingMatch.cskaLogoUrl, "ЦСКА")}
                             fill
-                            sizes="80px"
+                            sizes="64px"
                             className="object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-xl md:text-2xl">
+                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-sm md:text-lg">
                             ЖФК
                           </div>
                         )}
                       </div>
-                      <span className="font-semibold text-center text-sm md:text-base">
+                      <span className="font-semibold text-center text-xs md:text-sm">
                         ЦСКА
                       </span>
                     </div>
 
                     {/* VS */}
-                    <div className="px-4">
-                      <span className="text-2xl md:text-3xl font-bold text-muted-foreground">
+                    <div className="px-3">
+                      <span className="text-xl md:text-2xl font-bold text-muted-foreground">
                         VS
                       </span>
                     </div>
 
                     {/* Away Team */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-3 overflow-hidden relative">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
                         {upcomingMatch.opponentLogoUrl ? (
                           <Image
                             {...getImageProps(upcomingMatch.opponentLogoUrl, upcomingMatch.opponentName)}
                             fill
-                            sizes="80px"
+                            sizes="64px"
                             className="object-cover"
                           />
                         ) : (
-                          <span className="text-xl md:text-2xl font-bold text-muted-foreground">
+                          <span className="text-lg md:text-xl font-bold text-muted-foreground">
                             {upcomingMatch.opponentName.substring(0, 2)}
                           </span>
                         )}
                       </div>
-                      <span className="font-semibold text-center text-sm md:text-base">
+                      <span className="font-semibold text-center text-xs md:text-sm">
                         {upcomingMatch.opponentName}
                       </span>
                     </div>
                   </div>
 
                   {/* Match Info */}
-                  <div className="space-y-3 text-sm">
+                  <div className="space-y-2 text-xs">
                     <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar className="h-4 w-4 flex-shrink-0" />
+                      <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
                       <span>{formatDate(upcomingMatch.matchDate)}</span>
                     </div>
                     {upcomingMatch.venue && (
                       <div className="flex items-center gap-2 text-muted-foreground">
-                        <MapPin className="h-4 w-4 flex-shrink-0" />
+                        <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>{upcomingMatch.venue}</span>
                       </div>
                     )}
                   </div>
                 </CardContent>
 
-                <CardFooter className="flex gap-3">
+                <CardFooter className="flex gap-2 pt-0 pb-4">
                   <Button
                     asChild
-                    className="flex-1 bg-[var(--cska-red)] hover:bg-[var(--cska-red)]/90 button-hover focus-ring"
+                    size="sm"
+                    className="flex-1 bg-[var(--cska-red)] hover:bg-[var(--cska-red)]/90 button-hover focus-ring text-xs"
                   >
                     <Link href="/tickets">Купить билет</Link>
                   </Button>
-                  <Button asChild variant="outline" className="flex-1 button-hover focus-ring">
+                  <Button asChild variant="outline" size="sm" className="flex-1 button-hover focus-ring text-xs">
                     <Link href="/matches">Подробнее</Link>
                   </Button>
                 </CardFooter>
@@ -161,94 +162,94 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
 
           {/* Last Match */}
           {lastMatch && (
-            <Card className="overflow-hidden border-2 border-hover gpu-accelerated">
-                <CardHeader className="bg-gradient-to-br from-muted to-muted/50 pb-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <Badge variant="secondary" className="bg-[var(--cska-gold)] text-white hover:bg-[var(--cska-gold)]/90">
+            <Card className="overflow-hidden border-2 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 gpu-accelerated">
+                <CardHeader className="bg-gradient-to-br from-muted to-muted/50 pb-4">
+                  <div className="flex items-center justify-between">
+                    <Badge variant="secondary" className="bg-[var(--cska-gold)] text-white hover:bg-[var(--cska-gold)]/90 text-xs">
                       Последний матч
                     </Badge>
                     <div className="text-right">
-                      <div className="text-2xl font-bold">
+                      <div className="text-lg font-bold">
                         {formatShortDate(lastMatch.matchDate)}
                       </div>
                     </div>
                   </div>
                 </CardHeader>
 
-                <CardContent className="pt-8 pb-6">
+                <CardContent className="pt-6 pb-4">
                   {/* Teams with Score */}
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between mb-4">
                     {/* Home Team - CSKA */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-3 overflow-hidden relative">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
                         {lastMatch.cskaLogoUrl ? (
                           <Image
                             {...getImageProps(lastMatch.cskaLogoUrl, "ЦСКА")}
                             fill
-                            sizes="80px"
+                            sizes="64px"
                             className="object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-xl md:text-2xl">
+                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-sm md:text-lg">
                             ЖФК
                           </div>
                         )}
                       </div>
-                      <span className="font-semibold text-center text-sm md:text-base mb-2">
+                      <span className="font-semibold text-center text-xs md:text-sm mb-1">
                         ЦСКА
                       </span>
-                      <div className="text-3xl md:text-4xl font-bold text-[var(--cska-blue)]">
+                      <div className="text-2xl md:text-3xl font-bold text-[var(--cska-blue)]">
                         {lastMatch.scoreHome ?? "-"}
                       </div>
                     </div>
 
                     {/* Score Separator */}
-                    <div className="px-4">
-                      <Trophy className="h-8 w-8 text-[var(--cska-gold)]" />
+                    <div className="px-3">
+                      <Trophy className="h-6 w-6 text-[var(--cska-gold)]" />
                     </div>
 
                     {/* Away Team */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-3 overflow-hidden relative">
+                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
                         {lastMatch.opponentLogoUrl ? (
                           <Image
                             {...getImageProps(lastMatch.opponentLogoUrl, lastMatch.opponentName)}
                             fill
-                            sizes="80px"
+                            sizes="64px"
                             className="object-cover"
                           />
                         ) : (
-                          <span className="text-xl md:text-2xl font-bold text-muted-foreground">
+                          <span className="text-lg md:text-xl font-bold text-muted-foreground">
                             {lastMatch.opponentName.substring(0, 2)}
                           </span>
                         )}
                       </div>
-                      <span className="font-semibold text-center text-sm md:text-base mb-2">
+                      <span className="font-semibold text-center text-xs md:text-sm mb-1">
                         {lastMatch.opponentName}
                       </span>
-                      <div className="text-3xl md:text-4xl font-bold text-muted-foreground">
+                      <div className="text-2xl md:text-3xl font-bold text-muted-foreground">
                         {lastMatch.scoreAway ?? "-"}
                       </div>
                     </div>
                   </div>
 
                   {/* Match Info */}
-                  <div className="space-y-3 text-sm">
+                  <div className="space-y-2 text-xs">
                     <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar className="h-4 w-4 flex-shrink-0" />
+                      <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
                       <span>{formatDate(lastMatch.matchDate)}</span>
                     </div>
                     {lastMatch.venue && (
                       <div className="flex items-center gap-2 text-muted-foreground">
-                        <MapPin className="h-4 w-4 flex-shrink-0" />
+                        <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
                         <span>{lastMatch.venue}</span>
                       </div>
                     )}
                   </div>
                 </CardContent>
 
-                <CardFooter>
-                  <Button asChild variant="outline" className="w-full button-hover focus-ring">
+                <CardFooter className="pt-0 pb-4">
+                  <Button asChild variant="outline" size="sm" className="w-full button-hover focus-ring text-xs">
                     <Link href="/matches">Смотреть обзор</Link>
                   </Button>
                 </CardFooter>
@@ -257,8 +258,8 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
         </div>
 
         {/* View All Matches Link */}
-        <div className="text-center mt-12">
-          <Button asChild size="lg" variant="outline" className="button-hover focus-ring">
+        <div className="text-center mt-8">
+          <Button asChild size="default" variant="outline" className="button-hover focus-ring">
             <Link href="/matches">Все матчи</Link>
           </Button>
         </div>
