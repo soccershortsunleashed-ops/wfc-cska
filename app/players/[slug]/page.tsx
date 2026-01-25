@@ -95,21 +95,8 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
           </Link>
         </div>
 
-        {/* Player Header with Background Logo */}
+        {/* Player Header */}
         <div className="relative">
-          {/* Large Background Logo */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none overflow-hidden">
-            <div className="relative w-[600px] h-[600px]">
-              <Image
-                src="/seed-assets/cskaLogo-cska.png"
-                alt="ЦСКА"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </div>
-
           {/* Content */}
           <div className="relative grid md:grid-cols-[300px_1fr] gap-8 mb-8">
             {/* Player Photo */}
