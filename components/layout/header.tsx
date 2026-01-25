@@ -126,7 +126,7 @@ const socialLinks = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b gradient-subtle shadow-lg">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
@@ -136,10 +136,10 @@ export function Header() {
             className="h-12 w-12 object-contain"
           />
           <div className="flex flex-col">
-            <span className="text-base font-bold leading-none text-[var(--cska-blue)]">
+            <span className="text-base font-bold leading-none text-white">
               ЖФК ЦСКА
             </span>
-            <span className="text-xs text-muted-foreground leading-none mt-1">
+            <span className="text-xs text-white/70 leading-none mt-1">
               Москва
             </span>
           </div>
@@ -147,7 +147,7 @@ export function Header() {
 
         {/* Desktop Navigation and Social Links */}
         <div className="hidden lg:flex items-center gap-6">
-          <NavigationMenu>
+          <NavigationMenu className="[&_button]:text-white [&_button]:hover:text-white/80 [&_a]:text-white [&_a]:hover:text-white/80">
             <NavigationMenuList>
               {navigationItems.map((item) => (
                 <NavigationMenuItem key={item.href}>

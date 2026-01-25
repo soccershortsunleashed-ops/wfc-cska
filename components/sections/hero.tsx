@@ -24,9 +24,10 @@ export function Hero({ upcomingMatch }: HeroProps) {
 
   return (
     <section className="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent z-10" />
+        {/* CSKA Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0033A0]/95 via-[#0033A0]/85 to-[#E4002B]/90 z-10" />
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -46,10 +47,12 @@ export function Hero({ upcomingMatch }: HeroProps) {
             Сезон 2025/2026
           </Badge>
 
-          {/* Main Heading */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-            Женский футбольный клуб{" "}
-            <span className="text-[var(--cska-red)]">ЦСКА</span>
+          {/* Main Heading with Gradient Text */}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+            <span className="text-white">Женский футбольный клуб </span>
+            <span className="bg-gradient-to-r from-white to-[#E4002B] bg-clip-text text-transparent">
+              ЦСКА
+            </span>
           </h1>
 
           {/* Subtitle */}
@@ -58,12 +61,12 @@ export function Hero({ upcomingMatch }: HeroProps) {
             поддерживайте команду и будьте частью истории.
           </p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons with Gradients */}
           <div className="flex flex-wrap gap-4 mb-12">
             <Button
               asChild
               size="lg"
-              className="bg-[var(--cska-blue)] hover:bg-[var(--cska-blue)]/90 text-white button-hover focus-ring"
+              className="gradient-button text-white button-hover focus-ring shadow-lg hover:shadow-2xl"
             >
               <Link href="/matches">
                 Матчи
@@ -74,7 +77,7 @@ export function Hero({ upcomingMatch }: HeroProps) {
               asChild
               size="lg"
               variant="outline"
-              className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-[var(--cska-blue)] button-hover focus-ring"
+              className="border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#0033A0] button-hover focus-ring"
             >
               <Link href="/players">Команда</Link>
             </Button>
@@ -82,7 +85,7 @@ export function Hero({ upcomingMatch }: HeroProps) {
               asChild
               size="lg"
               variant="outline"
-              className="border-2 border-white/60 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-[var(--cska-blue)] button-hover focus-ring"
+              className="border-2 border-white/60 bg-white/10 backdrop-blur-sm text-white hover:bg-white hover:text-[#0033A0] button-hover focus-ring"
             >
               <Link href="/news">Новости</Link>
             </Button>

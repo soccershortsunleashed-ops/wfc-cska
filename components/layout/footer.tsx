@@ -88,7 +88,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t bg-muted/30">
+    <footer className="border-t gradient-subtle">
       <div className="container px-4 py-12 md:px-6 md:py-16">
         {/* Main Footer Content */}
         <div className="grid gap-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
@@ -101,10 +101,10 @@ export function Footer() {
                 className="h-14 w-14 object-contain"
               />
               <div className="flex flex-col">
-                <span className="text-lg font-bold leading-none text-[var(--cska-blue)]">
+                <span className="text-lg font-bold leading-none text-white">
                   ЖФК ЦСКА
                 </span>
-                <span className="text-sm text-muted-foreground leading-none mt-1">
+                <span className="text-sm text-white/70 leading-none mt-1">
                   Москва
                 </span>
               </div>
@@ -119,13 +119,13 @@ export function Footer() {
           {/* Navigation Links */}
           {navigationLinks.map((section) => (
             <div key={section.title}>
-              <h3 className="font-semibold mb-4">{section.title}</h3>
+              <h3 className="font-semibold mb-4 text-white">{section.title}</h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-white/70 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -137,7 +137,7 @@ export function Footer() {
         </div>
 
         {/* Contact Info */}
-        <div className="mt-12 pt-8 border-t">
+        <div className="mt-12 pt-8 border-t border-white/20">
           <div className="grid gap-6 md:grid-cols-3">
             {contactInfo.map((contact, index) => {
               const Icon = contact.icon
@@ -147,7 +147,7 @@ export function Footer() {
                   href={contact.href}
                   target={contact.href.startsWith("http") ? "_blank" : undefined}
                   rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-center space-x-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex items-center space-x-3 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   <Icon className="h-5 w-5 flex-shrink-0" />
                   <span>{contact.label}</span>
@@ -158,27 +158,27 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t">
+        <div className="mt-12 pt-8 border-t border-white/20">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground text-center md:text-left">
+            <p className="text-sm text-white/70 text-center md:text-left">
               © {currentYear} ЖФК ЦСКА. Все права защищены.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <Link
                 href="/privacy"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-white/70 hover:text-white transition-colors"
               >
                 Политика конфиденциальности
               </Link>
               <Link
                 href="/terms"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-white/70 hover:text-white transition-colors"
               >
                 Условия использования
               </Link>
               <Link
                 href="/cookies"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-white/70 hover:text-white transition-colors"
               >
                 Использование cookies
               </Link>
