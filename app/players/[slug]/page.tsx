@@ -2,10 +2,9 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowLeft, Calendar, MapPin, Ruler, Weight } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { playersService } from '@/lib/services/players.service'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PlayerStats } from '@/components/players/player-stats'
 
 interface PlayerPageProps {
@@ -128,71 +127,24 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
             <p className="text-sm text-muted-foreground mt-2">{teamLabels[player.team]}</p>
           </div>
 
-          {/* Player Details Grid */}
-          <div className="grid sm:grid-cols-2 gap-4">
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center gap-3">
-                  <Calendar className="h-5 w-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Возраст</p>
-                    <p className="text-lg font-semibold">{age} лет</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center gap-3">
-                  <Calendar className="h-5 w-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Дата рождения</p>
-                    <p className="text-lg font-semibold">{formatDate(player.birthDate)}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-muted-foreground" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Гражданство</p>
-                    <p className="text-lg font-semibold">{player.nationality}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {player.heightCm && (
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-3">
-                    <Ruler className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Рост</p>
-                      <p className="text-lg font-semibold">{player.heightCm} см</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {player.weightKg && (
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-center gap-3">
-                    <Weight className="h-5 w-5 text-muted-foreground" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Вес</p>
-                      <p className="text-lg font-semibold">{player.weightKg} кг</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+          {/* Player Details - Simplified */}
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p className="text-muted-foreground mb-1">Рост</p>
+              <p className="font-semibold">{player.heightCm ? `${player.heightCm} см` : '—'}</p>
+            </div>
+            <div>
+              <p className="text-muted-foreground mb-1">Вес</p>
+              <p className="font-semibold">{player.weightKg ? `${player.weightKg} кг` : '—'}</p>
+            </div>
+            <div>
+              <p className="text-muted-foreground mb-1">Дата рождения</p>
+              <p className="font-semibold">{formatDate(player.birthDate)}</p>
+            </div>
+            <div>
+              <p className="text-muted-foreground mb-1">Гражданство</p>
+              <p className="font-semibold">{player.nationality}</p>
+            </div>
           </div>
         </div>
       </div>
