@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Player {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  firstName   String
+  lastName    String
+  number      Int
+  position    Position
+  birthDate   DateTime
+  nationality String
+  heightCm    Int?
+  weightKg    Int?
+  photoUrl    String?
+  team        Team         @default(MAIN)
+  stats       PlayerStats?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model PlayerStats {
+  id              String   @id @default(cuid())
+  playerId        String   @unique
+  player          Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  
+  // Основная статистика
+  gamesPlayed     Int      @default(0)
+  minutesPlayed   Int      @default(0)
+  goals           Int      @default(0)
+  assists         Int      @default(0)
+  
+  // Карточки
+  yellowCards     Int      @default(0)
+  redCards        Int      @default(0)
+  
+  // Для вратарей
+  cleanSheets     Int?
+  goalsConceded   Int?
+  saves           Int?
+  
+  // Дополнительная статистика
+  shotsOnTarget   Int?
+  passAccuracy    Float?
+  
+  // Текущий сезон
+  season          String   @default("2025/2026")
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+enum Position {
+  GOALKEEPER
+  DEFENDER
+  MIDFIELDER
+  FORWARD
+}
+
+enum Team {
+  MAIN
+  YOUTH
+  JUNIOR
+}
+
+model News {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  title           String
+  excerpt         String
+  coverImageUrl   String?
+  publishedAt     DateTime
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Match {
+  id              String    @id @default(cuid())
+  type            MatchType
+  opponentName    String
+  opponentLogoUrl String?
+  cskaLogoUrl     String?
+  matchDate       DateTime
+  venue           String?
+  scoreHome       Int?
+  scoreAway       Int?
+  tournament      String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum MatchType {
+  UPCOMING
+  LAST
+}

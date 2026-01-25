@@ -1,0 +1,14 @@
+[
+  {
+    "type": "LAST",
+    "opponentName": "Динамо",
+    "opponentLogoUrl": "/seed-assets/opponentLogo-dinamo.png",
+    "cskaLogoUrl": "/seed-assets/cskaLogo-cska.png",
+    "matchDate": "2025-01-18T11:00:00.000Z",
+    "venue": "Арена Химки",
+    "scoreHome": 2,
+    "scoreAway": 1,
+    "tournament": "Winline Суперлига 2025",
+    "round": "23 тур"
+  }
+]

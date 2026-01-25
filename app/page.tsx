@@ -1,65 +1,112 @@
-import Image from "next/image";
+import { Metadata } from "next"
+import { Hero } from "@/components/sections/hero"
+import { MatchCard } from "@/components/sections/match-card"
+import { NewsSection } from "@/components/sections/news-section"
+import { TeamCarouselSection } from "@/components/sections/team-carousel-section"
+import { Sponsors } from "@/components/sections/sponsors"
+import { matchesService } from "@/lib/services/matches.service"
+import { newsService } from "@/lib/services/news.service"
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "ЖФК ЦСКА - Официальный сайт женского футбольного клуба ЦСКА Москва",
+  description:
+    "Официальный сайт женского футбольного клуба ЦСКА Москва. Новости команды, расписание матчей, состав игроков, турнирная таблица и результаты. Следите за выступлениями ЖФК ЦСКА в чемпионате России.",
+  keywords: [
+    "ЖФК ЦСКА",
+    "женский футбол",
+    "ЦСКА Москва",
+    "женская футбольная команда",
+    "чемпионат России",
+    "футбол",
+    "женский спорт",
+  ],
+  openGraph: {
+    title: "ЖФК ЦСКА - Официальный сайт",
+    description:
+      "Официальный сайт женского футбольного клуба ЦСКА Москва. Новости, матчи, состав команды.",
+    url: "https://wfccska.ru",
+    siteName: "ЖФК ЦСКА",
+    locale: "ru_RU",
+    type: "website",
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "ЖФК ЦСКА Москва",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ЖФК ЦСКА - Официальный сайт",
+    description:
+      "Официальный сайт женского футбольного клуба ЦСКА Москва. Новости, матчи, состав команды.",
+    images: ["/images/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "google-site-verification-code",
+    yandex: "yandex-verification-code",
+  },
+}
+
+export default async function Home() {
+  const [matchesData, newsData] = await Promise.all([
+    matchesService.getUpcomingAndLast(),
+    newsService.list(6),
+  ])
+
+  const upcomingMatch = matchesData.upcoming
+    ? {
+        opponentName: matchesData.upcoming.opponentName,
+        opponentLogoUrl: matchesData.upcoming.opponentLogoUrl,
+        cskaLogoUrl: matchesData.upcoming.cskaLogoUrl,
+        matchDate: matchesData.upcoming.matchDate.toISOString(),
+        venue: matchesData.upcoming.venue,
+        scoreHome: null,
+        scoreAway: null,
+      }
+    : null
+
+  const lastMatch = matchesData.last
+    ? {
+        opponentName: matchesData.last.opponentName,
+        opponentLogoUrl: matchesData.last.opponentLogoUrl,
+        cskaLogoUrl: matchesData.last.cskaLogoUrl,
+        matchDate: matchesData.last.matchDate.toISOString(),
+        venue: matchesData.last.venue,
+        scoreHome: matchesData.last.scoreHome,
+        scoreAway: matchesData.last.scoreAway,
+      }
+    : null
+
+  const news = newsData.map((item) => ({
+    id: item.id,
+    slug: item.slug,
+    title: item.title,
+    excerpt: item.excerpt,
+    coverImageUrl: item.coverImageUrl,
+    publishedAt: item.publishedAt.toISOString(),
+  }))
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div>
+      <Hero upcomingMatch={upcomingMatch} />
+      <MatchCard upcomingMatch={upcomingMatch} lastMatch={lastMatch} />
+      <NewsSection news={news} />
+      <TeamCarouselSection />
+      <Sponsors />
     </div>
-  );
+  )
 }
