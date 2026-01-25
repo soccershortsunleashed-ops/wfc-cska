@@ -19,6 +19,7 @@
 ## ✨ Особенности
 
 - 🎨 **Современный дизайн** с фирменными цветами ЦСКА (#0033A0, #E4002B)
+- 🌈 **Эффектные градиенты** вдохновленные дизайном ФК "Локомотив"
 - ⚡ **Высокая производительность** - Lighthouse Score > 90
 - 📱 **Адаптивный дизайн** - Mobile First подход
 - 🔍 **SEO оптимизация** - Meta tags, Open Graph, Schema.org
@@ -175,20 +176,22 @@ npx prisma studio
 --cska-white: #FFFFFF;   /* Белый */
 ```
 
-### Использование в Tailwind
+### Градиенты
+
+Проект использует эффектные градиенты, вдохновленные дизайном ФК "Локомотив":
 
 ```tsx
-// Синий ЦСКА
-<div className="bg-[#0033A0] text-white">
+// Hero градиент (Синий → Красный)
+<div className="gradient-hero">
 
-// Красный ЦСКА
-<div className="bg-[#E4002B] text-white">
+// Градиентный текст
+<h1 className="gradient-text">ЖФК ЦСКА</h1>
 
-// Градиент
-<div className="bg-gradient-to-r from-[#0033A0] to-[#E4002B]">
+// Кнопка с градиентом
+<button className="gradient-button">Купить билет</button>
 ```
 
-Подробнее: [COLOR-SCHEME.md](./COLOR-SCHEME.md), [QUICK-COLOR-GUIDE.md](./QUICK-COLOR-GUIDE.md)
+Подробнее: [COLOR-SCHEME-ENHANCED.md](./COLOR-SCHEME-ENHANCED.md), [GRADIENTS-QUICK-GUIDE.md](./GRADIENTS-QUICK-GUIDE.md)
 
 ### Типографика
 
@@ -335,6 +338,7 @@ NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"
 
 ### Быстрые справочники
 - 🎨 [QUICK-COLOR-GUIDE.md](./QUICK-COLOR-GUIDE.md) - Цвета
+- 🌈 [GRADIENTS-QUICK-GUIDE.md](./GRADIENTS-QUICK-GUIDE.md) - Градиенты
 - 📝 [TYPOGRAPHY-QUICK-GUIDE.md](./TYPOGRAPHY-QUICK-GUIDE.md) - Типографика
 - 🖼️ [QUICK-SETUP-FEATURED-IMAGE.md](./QUICK-SETUP-FEATURED-IMAGE.md) - Изображения
 
