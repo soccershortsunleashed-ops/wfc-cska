@@ -83,74 +83,94 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
   const age = calculateAge(player.birthDate)
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      {/* Back Button */}
-      <div className="mb-6">
-        <Link href="/players">
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Назад к составу
-          </Button>
-        </Link>
-      </div>
-
-      {/* Player Header */}
-      <div className="grid md:grid-cols-[300px_1fr] gap-8 mb-8">
-        {/* Player Photo */}
-        <div className="relative aspect-[3/4] w-full max-w-[300px] mx-auto md:mx-0 rounded-lg overflow-hidden bg-muted">
-          {player.photoUrl ? (
-            <Image
-              src={player.photoUrl}
-              alt={fullName}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, 300px"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-6xl font-bold text-muted-foreground">
-              {player.number}
-            </div>
-          )}
+    <div className="min-h-screen bg-gradient-to-br from-[var(--cska-blue)] via-[#002080] to-[#001440]">
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
+        {/* Back Button */}
+        <div className="mb-6">
+          <Link href="/players">
+            <Button variant="ghost" className="gap-2 text-white hover:bg-white/10">
+              <ArrowLeft className="h-4 w-4" />
+              Назад к составу
+            </Button>
+          </Link>
         </div>
 
-        {/* Player Info */}
-        <div className="space-y-6">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <div className="text-5xl font-bold text-primary">{player.number}</div>
+        {/* Player Header with Background Logo */}
+        <div className="relative">
+          {/* Large Background Logo */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none overflow-hidden">
+            <div className="relative w-[600px] h-[600px]">
+              <Image
+                src="/seed-assets/cskaLogo-cska.png"
+                alt="ЦСКА"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="relative grid md:grid-cols-[300px_1fr] gap-8 mb-8">
+            {/* Player Photo */}
+            <div className="relative aspect-[3/4] w-full max-w-[300px] mx-auto md:mx-0 rounded-lg overflow-hidden bg-black/20 backdrop-blur-sm border-2 border-white/10">
+              {player.photoUrl ? (
+                <Image
+                  src={player.photoUrl}
+                  alt={fullName}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 300px"
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-6xl font-bold text-white/50">
+                  {player.number}
+                </div>
+              )}
+            </div>
+
+            {/* Player Info */}
+            <div className="space-y-6 text-white">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold">{fullName}</h1>
-                <p className="text-xl text-muted-foreground">{positionLabels[player.position]}</p>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="text-5xl font-bold text-white">{player.number}</div>
+                  <div>
+                    <h1 className="text-3xl md:text-4xl font-bold text-white">{fullName}</h1>
+                    <p className="text-xl text-white/70">{positionLabels[player.position]}</p>
+                  </div>
+                </div>
+                <p className="text-sm text-white/60 mt-2">{teamLabels[player.team]}</p>
+              </div>
+
+              {/* Player Details - Simplified */}
+              <div className="grid grid-cols-2 gap-4 text-sm bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+                <div>
+                  <p className="text-white/60 mb-1">Рост</p>
+                  <p className="font-semibold text-white">{player.heightCm ? `${player.heightCm} см` : '—'}</p>
+                </div>
+                <div>
+                  <p className="text-white/60 mb-1">Вес</p>
+                  <p className="font-semibold text-white">{player.weightKg ? `${player.weightKg} кг` : '—'}</p>
+                </div>
+                <div>
+                  <p className="text-white/60 mb-1">Дата рождения</p>
+                  <p className="font-semibold text-white">{formatDate(player.birthDate)}</p>
+                </div>
+                <div>
+                  <p className="text-white/60 mb-1">Гражданство</p>
+                  <p className="font-semibold text-white">{player.nationality}</p>
+                </div>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground mt-2">{teamLabels[player.team]}</p>
-          </div>
-
-          {/* Player Details - Simplified */}
-          <div className="grid grid-cols-2 gap-4 text-sm">
-            <div>
-              <p className="text-muted-foreground mb-1">Рост</p>
-              <p className="font-semibold">{player.heightCm ? `${player.heightCm} см` : '—'}</p>
-            </div>
-            <div>
-              <p className="text-muted-foreground mb-1">Вес</p>
-              <p className="font-semibold">{player.weightKg ? `${player.weightKg} кг` : '—'}</p>
-            </div>
-            <div>
-              <p className="text-muted-foreground mb-1">Дата рождения</p>
-              <p className="font-semibold">{formatDate(player.birthDate)}</p>
-            </div>
-            <div>
-              <p className="text-muted-foreground mb-1">Гражданство</p>
-              <p className="font-semibold">{player.nationality}</p>
-            </div>
           </div>
         </div>
-      </div>
 
-      {/* Statistics Section */}
-      <PlayerStats stats={player.stats} position={player.position} />
+        {/* Statistics Section */}
+        <div className="relative">
+          <PlayerStats stats={player.stats} position={player.position} />
+        </div>
+      </div>
     </div>
   )
 }

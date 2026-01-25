@@ -15,7 +15,7 @@ export function PlayerStats({ stats, position }: PlayerStatsProps) {
 
   return (
     <div className="mt-8">
-      <h2 className="text-xl font-bold mb-4">Статистика сезона {stats.season}</h2>
+      <h2 className="text-xl font-bold mb-4 text-white">Статистика сезона {stats.season}</h2>
       
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-2xl">
         {/* Основная статистика - только самое важное */}
@@ -62,11 +62,11 @@ interface StatCardProps {
 
 function StatCard({ label, value, highlight }: StatCardProps) {
   return (
-    <div className="text-center p-4 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
-      <div className="text-3xl md:text-4xl font-bold mb-1" style={{ color: highlight ? 'var(--cska-blue)' : 'inherit' }}>
+    <div className="text-center p-4 rounded-lg bg-white/10 backdrop-blur-sm hover:bg-white/15 transition-colors border border-white/10">
+      <div className="text-3xl md:text-4xl font-bold mb-1 text-white" style={{ color: highlight ? '#E4002B' : 'white' }}>
         {value}
       </div>
-      <div className="text-xs md:text-sm text-muted-foreground uppercase tracking-wide">
+      <div className="text-xs md:text-sm text-white/70 uppercase tracking-wide">
         {label}
       </div>
     </div>
