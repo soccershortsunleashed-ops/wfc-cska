@@ -50,9 +50,43 @@
   --radius: 0.625rem;
   
   /* CSKA Brand Colors - Primary palette */
-  --cska-blue: #143d8d;      /* Primary brand color */
-  --cska-red: #e30613;       /* Accent/CTA color */
+  --cska-blue: #0033A0;      /* Official CSKA Blue */
+  --cska-red: #E4002B;       /* Official CSKA Red */
   --cska-gold: #d4af37;      /* Secondary/highlight color */
+  
+  /* CSKA Blue Palette */
+  --cska-blue-50: #e6eaf5;
+  --cska-blue-100: #b3c2e6;
+  --cska-blue-200: #809ad6;
+  --cska-blue-300: #4d72c7;
+  --cska-blue-400: #1a4ab8;
+  --cska-blue-500: #0033A0;   /* Main */
+  --cska-blue-600: #002980;
+  --cska-blue-700: #001f60;
+  --cska-blue-800: #001440;
+  --cska-blue-900: #000a20;
+  
+  /* CSKA Red Palette */
+  --cska-red-50: #fce6e9;
+  --cska-red-100: #f7b3bd;
+  --cska-red-200: #f28091;
+  --cska-red-300: #ed4d65;
+  --cska-red-400: #e81a39;
+  --cska-red-500: #E4002B;    /* Main */
+  --cska-red-600: #b30022;
+  --cska-red-700: #83001a;
+  --cska-red-800: #520011;
+  --cska-red-900: #220007;
+  
+  /* CSKA Gradients */
+  --gradient-hero: linear-gradient(135deg, #0033A0 0%, #E4002B 100%);
+  --gradient-hero-reverse: linear-gradient(135deg, #E4002B 0%, #0033A0 100%);
+  --gradient-subtle: linear-gradient(180deg, #001f5c 0%, #0033A0 100%);
+  --gradient-card: linear-gradient(135deg, rgba(0, 51, 160, 0.95) 0%, rgba(0, 51, 160, 0.85) 100%);
+  --gradient-button: linear-gradient(90deg, #E4002B 0%, #b30022 100%);
+  --gradient-accent: linear-gradient(90deg, #E4002B 0%, #0033A0 100%);
+  --gradient-hover: linear-gradient(135deg, #0033A0 0%, #0047cc 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(0, 51, 160, 0) 0%, rgba(0, 51, 160, 0.9) 100%);
   
   /* Light theme - CSKA branded */
   --background: oklch(1 0 0);                          /* Pure white */
@@ -392,5 +426,83 @@
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
+  }
+  
+  /* CSKA Gradient Utilities */
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-hero-reverse {
+    background: var(--gradient-hero-reverse);
+  }
+  
+  .gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .gradient-button {
+    background: var(--gradient-button);
+  }
+  
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  .gradient-hover {
+    background: var(--gradient-hover);
+  }
+  
+  .gradient-overlay {
+    background: var(--gradient-overlay);
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Gradient Border */
+  .gradient-border {
+    position: relative;
+    background: var(--background);
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: var(--gradient-hero);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  
+  /* Animated Gradient */
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .gradient-animated {
+    background: linear-gradient(270deg, #0033A0, #E4002B, #0033A0);
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
   }
 }
