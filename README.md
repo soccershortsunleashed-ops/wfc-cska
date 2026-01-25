@@ -40,7 +40,7 @@
 
 ```bash
 # Клонировать репозиторий
-git clone https://github.com/yourusername/wfc-cska.git
+git clone https://github.com/soccershortsunleashed-ops/wfc-cska.git
 cd wfc-cska
 
 # Установить зависимости
@@ -327,8 +327,6 @@ NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"
 ## 📚 Документация
 
 ### Основная документация
-- 📖 [ПРОЕКТ-СПРАВКА.md](./ПРОЕКТ-СПРАВКА.md) - Сводный справочник
-- 🚀 [БЫСТРЫЙ-СТАРТ.md](./БЫСТРЫЙ-СТАРТ.md) - Быстрое начало работы
 - 🎨 [COLOR-SCHEME.md](./COLOR-SCHEME.md) - Цветовая схема
 - 📝 [TYPOGRAPHY.md](./TYPOGRAPHY.md) - Типографика
 - 🚀 [DEPLOYMENT.md](./DEPLOYMENT.md) - Инструкции по деплою
@@ -364,11 +362,11 @@ npx shadcn@latest add [component-name]
 
 ## 🐛 Известные проблемы
 
-Нет известных критических проблем. Для сообщения об ошибках используйте [Issues](https://github.com/yourusername/wfc-cska/issues).
+Нет известных критических проблем. Для сообщения об ошибках используйте [Issues](https://github.com/soccershortsunleashed-ops/wfc-cska/issues).
 
 ## 📝 Changelog
 
-См. [RELEASES](https://github.com/yourusername/wfc-cska/releases) для истории изменений.
+См. [CHANGELOG.md](./CHANGELOG.md) для истории изменений.
 
 ## 📄 Лицензия
 
