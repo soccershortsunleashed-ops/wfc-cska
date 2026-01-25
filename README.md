@@ -331,10 +331,12 @@ NEXT_PUBLIC_GA_ID="G-XXXXXXXXXX"
 
 ### Основная документация
 - 🎨 [COLOR-SCHEME.md](./COLOR-SCHEME.md) - Цветовая схема
+- 🌈 [COLOR-SCHEME-ENHANCED.md](./COLOR-SCHEME-ENHANCED.md) - Расширенная цветовая палитра
 - 📝 [TYPOGRAPHY.md](./TYPOGRAPHY.md) - Типографика
 - 🚀 [DEPLOYMENT.md](./DEPLOYMENT.md) - Инструкции по деплою
 - 🔗 [FLOATING-DOCK-GUIDE.md](./FLOATING-DOCK-GUIDE.md) - Руководство по FloatingDock
 - 🔌 [BITRIX24-INTEGRATION.md](./BITRIX24-INTEGRATION.md) - Интеграция с Bitrix24
+- ✅ [GRADIENT-IMPLEMENTATION-SUMMARY.md](./GRADIENT-IMPLEMENTATION-SUMMARY.md) - Итоги внедрения градиентов
 
 ### Быстрые справочники
 - 🎨 [QUICK-COLOR-GUIDE.md](./QUICK-COLOR-GUIDE.md) - Цвета
