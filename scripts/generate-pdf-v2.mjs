@@ -28,11 +28,19 @@ const md = new MarkdownIt({
 
 /**
  * Заменяет относительные ссылки на полные GitHub URL
+ * Для изображений оставляет локальные пути для корректной загрузки в PDF
  */
-function replaceRelativeLinks(content) {
-  // Заменяем ссылки на изображения
-  content = content.replace(/!\[([^\]]*)\]\(\.\/screenshots\//g, `![$1](${GITHUB_RAW}/screenshots/`);
-  content = content.replace(/!\[([^\]]*)\]\(screenshots\//g, `![$1](${GITHUB_RAW}/screenshots/`);
+function replaceRelativeLinks(content, useLocalImages = true) {
+  if (useLocalImages) {
+    // Для PDF используем локальные пути к изображениям
+    content = content.replace(/!\[([^\]]*)\]\(\.\/screenshots\//g, `![$1](screenshots/`);
+    // Убираем ./ если есть
+    content = content.replace(/!\[([^\]]*)\]\(screenshots\//g, `![$1](screenshots/`);
+  } else {
+    // Для веб-версии используем GitHub URL
+    content = content.replace(/!\[([^\]]*)\]\(\.\/screenshots\//g, `![$1](${GITHUB_RAW}/screenshots/`);
+    content = content.replace(/!\[([^\]]*)\]\(screenshots\//g, `![$1](${GITHUB_RAW}/screenshots/`);
+  }
   
   // Заменяем ссылки на видео
   content = content.replace(/\[▶️([^\]]*)\]\(\.\/videos\//g, `[▶️$1](${GITHUB_RAW}/videos/`);
@@ -265,9 +273,9 @@ async function generatePDF(inputFile, outputFile) {
     const inputPath = join(rootDir, inputFile);
     let content = await readFile(inputPath, 'utf-8');
     
-    // Заменяем относительные ссылки на полные
-    console.log('🔗 Замена относительных ссылок на GitHub URL...');
-    content = replaceRelativeLinks(content);
+    // Заменяем относительные ссылки на полные (используем локальные изображения для PDF)
+    console.log('🔗 Обработка ссылок...');
+    content = replaceRelativeLinks(content, true);
     
     // Конвертируем Markdown в HTML
     console.log('📝 Конвертация Markdown в HTML...');
@@ -286,8 +294,14 @@ async function generatePDF(inputFile, outputFile) {
     
     const page = await browser.newPage();
     
+    // Конвертируем относительные пути изображений в абсолютные file:// URL
+    const absoluteHTML = fullHTML.replace(
+      /src="screenshots\//g,
+      `src="file:///${rootDir.replace(/\\/g, '/')}/screenshots/`
+    );
+    
     // Загружаем HTML
-    await page.setContent(fullHTML, {
+    await page.setContent(absoluteHTML, {
       waitUntil: 'networkidle0'
     });
     
