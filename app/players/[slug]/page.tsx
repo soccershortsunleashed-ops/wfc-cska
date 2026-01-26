@@ -6,6 +6,7 @@ import { ArrowLeft } from 'lucide-react'
 import { playersService } from '@/lib/services/players.service'
 import { Button } from '@/components/ui/button'
 import { PlayerStats } from '@/components/players/player-stats'
+import { StripedPattern } from '@/components/ui/striped-pattern'
 
 interface PlayerPageProps {
   params: Promise<{
@@ -83,8 +84,16 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
   const age = calculateAge(player.birthDate)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[var(--cska-blue)] via-[#002080] to-[#001440]">
-      <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="min-h-screen bg-gradient-to-br from-[var(--cska-blue)] via-[#002080] to-[#001440] relative overflow-hidden">
+      {/* Striped Pattern Background */}
+      <StripedPattern 
+        stripeColor="rgba(255, 255, 255, 0.03)"
+        stripeWidth={30}
+        stripeAngle={45}
+        className="z-0"
+      />
+      
+      <div className="container mx-auto px-4 py-8 max-w-6xl relative z-10">
         {/* Back Button */}
         <div className="mb-6">
           <Link href="/players">
