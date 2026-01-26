@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import { Hero } from "@/components/sections/hero"
 import { MatchCard } from "@/components/sections/match-card"
 import { NewsSection } from "@/components/sections/news-section"
-import { TeamCarouselSection } from "@/components/sections/team-carousel-section"
+import { PlayersGallery } from "@/components/sections/players-gallery"
 import { Sponsors } from "@/components/sections/sponsors"
 import { matchesService } from "@/lib/services/matches.service"
 import { newsService } from "@/lib/services/news.service"
@@ -105,7 +105,7 @@ export default async function Home() {
       <Hero upcomingMatch={upcomingMatch} />
       <MatchCard upcomingMatch={upcomingMatch} lastMatch={lastMatch} />
       <NewsSection news={news} />
-      <TeamCarouselSection />
+      <PlayersGallery />
       <Sponsors />
     </div>
   )
