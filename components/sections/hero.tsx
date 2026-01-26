@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Calendar, MapPin, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { WavyBackground } from "@/components/ui/wavy-background"
 
 interface HeroProps {
   upcomingMatch?: {
@@ -23,19 +24,21 @@ export function Hero({ upcomingMatch }: HeroProps) {
   }
 
   return (
-    <section className="relative min-h-[600px] md:min-h-[700px] flex items-center overflow-hidden">
-      {/* Background Image with Gradient Overlay */}
-      <div className="absolute inset-0 z-0">
-        {/* CSKA Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0033A0]/95 via-[#0033A0]/85 to-[#E4002B]/90 z-10" />
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=2000')",
-          }}
-        />
-      </div>
-
+    <WavyBackground
+      containerClassName="min-h-[600px] md:min-h-[700px]"
+      colors={[
+        "#0033A0", // CSKA Blue
+        "#E4002B", // CSKA Red
+        "#0033A0",
+        "#E4002B",
+        "#0044BB", // Lighter Blue
+      ]}
+      waveWidth={60}
+      backgroundFill="#000814"
+      blur={12}
+      speed="slow"
+      waveOpacity={0.6}
+    >
       {/* Content */}
       <div className="container relative z-20 px-4 md:px-6">
         <div className="max-w-3xl">
@@ -125,9 +128,6 @@ export function Hero({ upcomingMatch }: HeroProps) {
           )}
         </div>
       </div>
-
-      {/* Decorative Elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
-    </section>
+    </WavyBackground>
   )
 }
