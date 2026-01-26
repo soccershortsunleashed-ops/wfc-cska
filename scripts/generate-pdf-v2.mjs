@@ -294,14 +294,23 @@ async function generatePDF(inputFile, outputFile) {
     
     const page = await browser.newPage();
     
-    // Конвертируем относительные пути изображений в абсолютные file:// URL
+    // Включаем доступ к локальным файлам
+    await page.setRequestInterception(true);
+    page.on('request', (request) => {
+      request.continue();
+    });
+    
+    // Создаём временный HTML файл с абсолютными путями
+    const tempHTMLPath = join(rootDir, 'temp-pdf.html');
     const absoluteHTML = fullHTML.replace(
       /src="screenshots\//g,
       `src="file:///${rootDir.replace(/\\/g, '/')}/screenshots/`
     );
     
-    // Загружаем HTML
-    await page.setContent(absoluteHTML, {
+    await writeFile(tempHTMLPath, absoluteHTML, 'utf-8');
+    
+    // Загружаем HTML из файла
+    await page.goto(`file:///${tempHTMLPath.replace(/\\/g, '/')}`, {
       waitUntil: 'networkidle0'
     });
     
@@ -322,6 +331,14 @@ async function generatePDF(inputFile, outputFile) {
     });
     
     console.log(`✅ PDF создан: ${outputFile}\n`);
+    
+    // Удаляем временный HTML файл
+    try {
+      await import('fs').then(fs => fs.promises.unlink(tempHTMLPath));
+    } catch (e) {
+      // Игнорируем ошибку если файл не существует
+    }
+    
     return true;
     
   } catch (error) {
