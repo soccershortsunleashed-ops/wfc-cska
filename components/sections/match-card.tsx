@@ -82,63 +82,63 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                   <div className="flex items-center justify-between mb-3">
                     {/* Home Team - CSKA */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-muted flex items-center justify-center mb-1.5 overflow-hidden relative">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
                         {upcomingMatch.cskaLogoUrl ? (
                           <Image
                             {...getImageProps(upcomingMatch.cskaLogoUrl, "ЦСКА")}
                             fill
-                            sizes="48px"
+                            sizes="80px"
                             className="object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-xs md:text-sm">
+                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-sm md:text-base">
                             ЖФК
                           </div>
                         )}
                       </div>
-                      <span className="font-semibold text-center text-[10px] md:text-xs">
+                      <span className="font-semibold text-center text-sm md:text-base">
                         ЦСКА
                       </span>
                     </div>
 
                     {/* VS */}
-                    <div className="px-2">
-                      <span className="text-lg md:text-xl font-bold text-muted-foreground">
+                    <div className="px-3">
+                      <span className="text-2xl md:text-3xl font-bold text-muted-foreground">
                         VS
                       </span>
                     </div>
 
                     {/* Away Team */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-muted flex items-center justify-center mb-1.5 overflow-hidden relative">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
                         {upcomingMatch.opponentLogoUrl ? (
                           <Image
                             {...getImageProps(upcomingMatch.opponentLogoUrl, upcomingMatch.opponentName)}
                             fill
-                            sizes="48px"
+                            sizes="80px"
                             className="object-cover"
                           />
                         ) : (
-                          <span className="text-sm md:text-base font-bold text-muted-foreground">
+                          <span className="text-base md:text-lg font-bold text-muted-foreground">
                             {upcomingMatch.opponentName.substring(0, 2)}
                           </span>
                         )}
                       </div>
-                      <span className="font-semibold text-center text-[10px] md:text-xs">
+                      <span className="font-semibold text-center text-sm md:text-base">
                         {upcomingMatch.opponentName}
                       </span>
                     </div>
                   </div>
 
                   {/* Match Info */}
-                  <div className="space-y-1.5 text-[10px]">
-                    <div className="flex items-center gap-1.5 text-muted-foreground">
-                      <Calendar className="h-3 w-3 flex-shrink-0" />
+                  <div className="space-y-1.5 text-xs md:text-sm">
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <Calendar className="h-4 w-4 flex-shrink-0" />
                       <span>{formatDate(upcomingMatch.matchDate)}</span>
                     </div>
                     {upcomingMatch.venue && (
-                      <div className="flex items-center gap-1.5 text-muted-foreground">
-                        <MapPin className="h-3 w-3 flex-shrink-0" />
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <MapPin className="h-4 w-4 flex-shrink-0" />
                         <span>{upcomingMatch.venue}</span>
                       </div>
                     )}
@@ -149,11 +149,11 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                   <Button
                     asChild
                     size="sm"
-                    className="flex-1 bg-[var(--cska-red)] hover:bg-[var(--cska-red)]/90 button-hover focus-ring text-[10px] h-7"
+                    className="flex-1 bg-[var(--cska-red)] hover:bg-[var(--cska-red)]/90 button-hover focus-ring text-xs md:text-sm h-8 md:h-9"
                   >
                     <Link href="/tickets">Купить билет</Link>
                   </Button>
-                  <Button asChild variant="outline" size="sm" className="flex-1 button-hover focus-ring text-[10px] h-7">
+                  <Button asChild variant="outline" size="sm" className="flex-1 button-hover focus-ring text-xs md:text-sm h-8 md:h-9">
                     <Link href="/matches">Подробнее</Link>
                   </Button>
                 </CardFooter>
@@ -181,67 +181,67 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                   <div className="flex items-center justify-between mb-3">
                     {/* Home Team - CSKA */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-muted flex items-center justify-center mb-1.5 overflow-hidden relative">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
                         {lastMatch.cskaLogoUrl ? (
                           <Image
                             {...getImageProps(lastMatch.cskaLogoUrl, "ЦСКА")}
                             fill
-                            sizes="48px"
+                            sizes="80px"
                             className="object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-xs md:text-sm">
+                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-sm md:text-base">
                             ЖФК
                           </div>
                         )}
                       </div>
-                      <span className="font-semibold text-center text-[10px] md:text-xs mb-1">
+                      <span className="font-semibold text-center text-sm md:text-base mb-1">
                         ЦСКА
                       </span>
-                      <div className="text-xl md:text-2xl font-bold text-[var(--cska-blue)]">
+                      <div className="text-3xl md:text-4xl font-bold text-[var(--cska-blue)]">
                         {lastMatch.scoreHome ?? "-"}
                       </div>
                     </div>
 
                     {/* Score Separator */}
-                    <div className="px-2">
-                      <Trophy className="h-5 w-5 text-[var(--cska-gold)]" />
+                    <div className="px-3">
+                      <Trophy className="h-6 w-6 text-[var(--cska-gold)]" />
                     </div>
 
                     {/* Away Team */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-muted flex items-center justify-center mb-1.5 overflow-hidden relative">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
                         {lastMatch.opponentLogoUrl ? (
                           <Image
                             {...getImageProps(lastMatch.opponentLogoUrl, lastMatch.opponentName)}
                             fill
-                            sizes="48px"
+                            sizes="80px"
                             className="object-cover"
                           />
                         ) : (
-                          <span className="text-sm md:text-base font-bold text-muted-foreground">
+                          <span className="text-base md:text-lg font-bold text-muted-foreground">
                             {lastMatch.opponentName.substring(0, 2)}
                           </span>
                         )}
                       </div>
-                      <span className="font-semibold text-center text-[10px] md:text-xs mb-1">
+                      <span className="font-semibold text-center text-sm md:text-base mb-1">
                         {lastMatch.opponentName}
                       </span>
-                      <div className="text-xl md:text-2xl font-bold text-muted-foreground">
+                      <div className="text-3xl md:text-4xl font-bold text-muted-foreground">
                         {lastMatch.scoreAway ?? "-"}
                       </div>
                     </div>
                   </div>
 
                   {/* Match Info */}
-                  <div className="space-y-1.5 text-[10px]">
-                    <div className="flex items-center gap-1.5 text-muted-foreground">
-                      <Calendar className="h-3 w-3 flex-shrink-0" />
+                  <div className="space-y-1.5 text-xs md:text-sm">
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <Calendar className="h-4 w-4 flex-shrink-0" />
                       <span>{formatDate(lastMatch.matchDate)}</span>
                     </div>
                     {lastMatch.venue && (
-                      <div className="flex items-center gap-1.5 text-muted-foreground">
-                        <MapPin className="h-3 w-3 flex-shrink-0" />
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <MapPin className="h-4 w-4 flex-shrink-0" />
                         <span>{lastMatch.venue}</span>
                       </div>
                     )}
@@ -249,7 +249,7 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                 </CardContent>
 
                 <CardFooter className="pt-0 pb-3 px-4">
-                  <Button asChild variant="outline" size="sm" className="w-full button-hover focus-ring text-[10px] h-7">
+                  <Button asChild variant="outline" size="sm" className="w-full button-hover focus-ring text-xs md:text-sm h-8 md:h-9">
                     <Link href="/matches">Смотреть обзор</Link>
                   </Button>
                 </CardFooter>
