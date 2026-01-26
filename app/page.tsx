@@ -2,11 +2,10 @@ import { Metadata } from "next"
 import { Hero } from "@/components/sections/hero"
 import { MatchCard } from "@/components/sections/match-card"
 import { NewsSection } from "@/components/sections/news-section"
-import { PlayersGallery } from "@/components/sections/players-gallery"
+import { TeamFocusRail } from "@/components/sections/team-focus-rail"
 import { Sponsors } from "@/components/sections/sponsors"
 import { matchesService } from "@/lib/services/matches.service"
 import { newsService } from "@/lib/services/news.service"
-import { playersService } from "@/lib/services/players.service"
 
 export const metadata: Metadata = {
   title: "ЖФК ЦСКА - Официальный сайт женского футбольного клуба ЦСКА Москва",
@@ -63,13 +62,9 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const [matchesData, newsData, playersData] = await Promise.all([
+  const [matchesData, newsData] = await Promise.all([
     matchesService.getUpcomingAndLast(),
     newsService.list(6),
-    playersService.list({
-      team: "MAIN",
-      sort: "number",
-    }),
   ])
 
   const upcomingMatch = matchesData.upcoming
@@ -105,15 +100,12 @@ export default async function Home() {
     publishedAt: item.publishedAt.toISOString(),
   }))
 
-  // Берём первых 12 игроков для галереи
-  const featuredPlayers = playersData.slice(0, 12)
-
   return (
     <div>
       <Hero upcomingMatch={upcomingMatch} />
       <MatchCard upcomingMatch={upcomingMatch} lastMatch={lastMatch} />
       <NewsSection news={news} />
-      <PlayersGallery players={featuredPlayers} />
+      <TeamFocusRail />
       <Sponsors />
     </div>
   )
