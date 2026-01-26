@@ -258,9 +258,18 @@ export function FocusRail({
                     {activeItem.meta}
                   </span>
                 )}
-                <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-white">
-                  {activeItem.title}
-                </h2>
+                {activeItem.href ? (
+                  <Link href={activeItem.href}>
+                    <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-white hover:text-emerald-400 transition-colors cursor-pointer group">
+                      {activeItem.title}
+                      <span className="inline-block ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                    </h2>
+                  </Link>
+                ) : (
+                  <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-white">
+                    {activeItem.title}
+                  </h2>
+                )}
                 {activeItem.description && (
                   <p className="max-w-md text-neutral-400">
                     {activeItem.description}
