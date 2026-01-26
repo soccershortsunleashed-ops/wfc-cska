@@ -300,8 +300,6 @@ export function FocusRail({
               </button>
             </div>
           </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
