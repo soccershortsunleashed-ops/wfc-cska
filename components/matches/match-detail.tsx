@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Match, MatchStatus } from "@prisma/client"
-import { Calendar, MapPin, Trophy, Users, Whistle, ArrowLeft, Video } from "lucide-react"
+import { Calendar, MapPin, Trophy, Users, User, ArrowLeft, Video } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -215,7 +215,7 @@ export function MatchDetail({ match }: MatchDetailProps) {
 
             {match.referee && (
               <div className="flex items-start gap-3">
-                <Whistle className="h-5 w-5 text-[var(--cska-blue)] mt-0.5 flex-shrink-0" />
+                <User className="h-5 w-5 text-[var(--cska-blue)] mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-sm text-muted-foreground">Главный судья</div>
                   <div className="font-medium">{match.referee}</div>
