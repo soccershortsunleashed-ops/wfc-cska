@@ -21,20 +21,28 @@
 - [x] Создать миграцию БД
 - [x] Обновить seed данные
 
-## 🔧 Этап 3: Сервисы и API
-- [ ] Расширить `matches.service.ts`:
-  - [ ] Метод `list()` - список всех матчей с фильтрами
-  - [ ] Метод `getById()` - получить матч по ID
-  - [ ] Метод `getBySlug()` - получить матч по slug
-  - [ ] Метод `getByTournament()` - матчи по турниру
-  - [ ] Метод `getBySeason()` - матчи по сезону
-  - [ ] Метод `getUpcoming()` - предстоящие матчи
-  - [ ] Метод `getPast()` - прошедшие матчи
-- [ ] Создать API endpoints:
-  - [ ] `/api/matches` - список матчей
-  - [ ] `/api/matches/[id]` - детали матча
-  - [ ] `/api/matches/upcoming` - предстоящие
-  - [ ] `/api/matches/past` - прошедшие
+## 🔧 Этап 3: Сервисы и API ✅ ЗАВЕРШЕНО
+- [x] Расширить `matches.service.ts`:
+  - [x] Метод `list()` - список всех матчей с фильтрами
+  - [x] Метод `getById()` - получить матч по ID
+  - [x] Метод `getBySlug()` - получить матч по slug
+  - [x] Метод `getByTournament()` - матчи по турниру
+  - [x] Метод `getBySeason()` - матчи по сезону
+  - [x] Метод `getUpcoming()` - предстоящие матчи
+  - [x] Метод `getPast()` - прошедшие матчи
+  - [x] Метод `getNextMatch()` - ближайший матч
+  - [x] Метод `getLastMatch()` - последний матч
+  - [x] Метод `getTournaments()` - список турниров
+  - [x] Метод `getSeasons()` - список сезонов
+  - [x] Метод `getStats()` - статистика матчей
+- [x] Создать API endpoints:
+  - [x] `/api/matches` - список матчей с фильтрами и пагинацией
+  - [x] `/api/matches/[id]` - детали матча
+  - [x] `/api/matches/upcoming` - предстоящие матчи
+  - [x] `/api/matches/past` - прошедшие матчи
+  - [x] `/api/matches/tournaments` - список турниров
+  - [x] `/api/matches/seasons` - список сезонов
+  - [x] `/api/matches/stats` - статистика матчей
 
 ## 🎨 Этап 4: UI компоненты
 - [ ] Создать компоненты:
