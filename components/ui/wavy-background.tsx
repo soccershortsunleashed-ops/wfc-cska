@@ -112,7 +112,7 @@ export const WavyBackground = ({
   return (
     <div
       className={cn(
-        "h-screen flex flex-col items-center justify-center",
+        "h-screen flex flex-col items-center justify-center relative",
         containerClassName
       )}
     >
@@ -124,6 +124,10 @@ export const WavyBackground = ({
           ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
         }}
       ></canvas>
+      
+      {/* Градиентный переход внизу */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-[#0033A0]/30 to-background pointer-events-none z-10" />
+      
       <div className={cn("relative z-10", className)} {...props}>
         {children}
       </div>
