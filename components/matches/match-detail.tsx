@@ -79,61 +79,98 @@ export function MatchDetail({ match }: MatchDetailProps) {
 
       {/* Main Match Card */}
       <Card className="overflow-hidden">
-        <CardHeader className="bg-gradient-to-br from-[var(--cska-blue)] to-[var(--cska-blue)]/80 text-white">
-          <div className="flex items-center justify-between mb-4">
-            {getStatusBadge(match.status)}
-            <div className="text-right">
-              <div className="text-sm opacity-90">{match.season}</div>
+        <CardHeader className="bg-gradient-to-br from-[var(--cska-blue)] to-[var(--cska-blue)]/80 text-white p-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              {getStatusBadge(match.status)}
+              {match.tournament && (
+                <>
+                  <Separator orientation="vertical" className="h-6 bg-white/20" />
+                  <div className="flex items-center gap-2">
+                    <Trophy className="h-5 w-5" />
+                    <span className="font-semibold text-base">{match.tournament}</span>
+                    {match.round && <span className="text-sm opacity-90">• {match.round}</span>}
+                  </div>
+                </>
+              )}
             </div>
+            <div className="text-lg font-semibold">{match.season}</div>
           </div>
-          
-          {match.tournament && (
-            <div className="flex items-center gap-2 text-sm opacity-90">
-              <Trophy className="h-4 w-4" />
-              <span>{match.tournament}</span>
-              {match.round && <span>• {match.round}</span>}
-            </div>
-          )}
         </CardHeader>
 
         <CardContent className="p-6 md:p-8">
           {/* Teams and Score */}
           <div className="flex items-center justify-between gap-8 mb-8">
-            {/* CSKA */}
-            <div className="flex flex-col items-center flex-1">
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
-                {match.cskaLogoUrl ? (
-                  <div className="relative w-full h-full">
-                    <Image
-                      {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
-                      fill
-                      sizes="128px"
-                      className="object-contain"
-                    />
-                  </div>
-                ) : (
-                  <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-2xl rounded-full">
-                    ЖФК
-                  </div>
-                )}
-              </div>
-              <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
-                ЦСКА
-              </h2>
-              {match.isHome && (
+            {/* Home Team (left) */}
+            {match.isHome ? (
+              // ЦСКА дома - слева
+              <div className="flex flex-col items-center flex-1">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
+                  {match.cskaLogoUrl ? (
+                    <div className="relative w-full h-full">
+                      <Image
+                        {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
+                        fill
+                        sizes="128px"
+                        className="object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-2xl rounded-full">
+                      ЖФК
+                    </div>
+                  )}
+                </div>
+                <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
+                  ЦСКА
+                </h2>
                 <Badge variant="outline" className="text-xs">
                   Дома
                 </Badge>
-              )}
-              {isFinished && hasScore && (
-                <div className={cn(
-                  "text-5xl md:text-6xl font-bold mt-4",
-                  cskaWon ? "text-[var(--cska-blue)]" : isDraw ? "text-muted-foreground" : "text-muted-foreground/50"
-                )}>
-                  {match.scoreHome}
+                {isFinished && hasScore && (
+                  <div className={cn(
+                    "text-5xl md:text-6xl font-bold mt-4",
+                    cskaWon ? "text-[var(--cska-blue)]" : isDraw ? "text-muted-foreground" : "text-muted-foreground/50"
+                  )}>
+                    {match.scoreHome}
+                  </div>
+                )}
+              </div>
+            ) : (
+              // Соперник дома - слева
+              <div className="flex flex-col items-center flex-1">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
+                  {match.opponentLogoUrl ? (
+                    <div className="relative w-full h-full">
+                      <Image
+                        {...getImageProps(match.opponentLogoUrl, match.opponentName)}
+                        fill
+                        sizes="128px"
+                        className="object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <span className="text-3xl font-bold text-muted-foreground">
+                      {match.opponentName.substring(0, 2)}
+                    </span>
+                  )}
                 </div>
-              )}
-            </div>
+                <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
+                  {match.opponentName}
+                </h2>
+                <Badge variant="outline" className="text-xs">
+                  Дома
+                </Badge>
+                {isFinished && hasScore && (
+                  <div className={cn(
+                    "text-5xl md:text-6xl font-bold mt-4",
+                    !cskaWon && !isDraw ? "text-[var(--cska-blue)]" : isDraw ? "text-muted-foreground" : "text-muted-foreground/50"
+                  )}>
+                    {match.scoreHome}
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* VS or Score Separator */}
             <div className="flex flex-col items-center">
@@ -148,41 +185,76 @@ export function MatchDetail({ match }: MatchDetailProps) {
               )}
             </div>
 
-            {/* Opponent */}
-            <div className="flex flex-col items-center flex-1">
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
-                {match.opponentLogoUrl ? (
-                  <div className="relative w-full h-full">
-                    <Image
-                      {...getImageProps(match.opponentLogoUrl, match.opponentName)}
-                      fill
-                      sizes="128px"
-                      className="object-contain"
-                    />
-                  </div>
-                ) : (
-                  <span className="text-3xl font-bold text-muted-foreground">
-                    {match.opponentName.substring(0, 2)}
-                  </span>
-                )}
-              </div>
-              <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
-                {match.opponentName}
-              </h2>
-              {!match.isHome && (
+            {/* Away Team (right) */}
+            {match.isHome ? (
+              // Соперник в гостях - справа
+              <div className="flex flex-col items-center flex-1">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
+                  {match.opponentLogoUrl ? (
+                    <div className="relative w-full h-full">
+                      <Image
+                        {...getImageProps(match.opponentLogoUrl, match.opponentName)}
+                        fill
+                        sizes="128px"
+                        className="object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <span className="text-3xl font-bold text-muted-foreground">
+                      {match.opponentName.substring(0, 2)}
+                    </span>
+                  )}
+                </div>
+                <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
+                  {match.opponentName}
+                </h2>
                 <Badge variant="outline" className="text-xs">
                   В гостях
                 </Badge>
-              )}
-              {isFinished && hasScore && (
-                <div className={cn(
-                  "text-5xl md:text-6xl font-bold mt-4",
-                  !cskaWon && !isDraw ? "text-[var(--cska-blue)]" : isDraw ? "text-muted-foreground" : "text-muted-foreground/50"
-                )}>
-                  {match.scoreAway}
+                {isFinished && hasScore && (
+                  <div className={cn(
+                    "text-5xl md:text-6xl font-bold mt-4",
+                    !cskaWon && !isDraw ? "text-[var(--cska-blue)]" : isDraw ? "text-muted-foreground" : "text-muted-foreground/50"
+                  )}>
+                    {match.scoreAway}
+                  </div>
+                )}
+              </div>
+            ) : (
+              // ЦСКА в гостях - справа
+              <div className="flex flex-col items-center flex-1">
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
+                  {match.cskaLogoUrl ? (
+                    <div className="relative w-full h-full">
+                      <Image
+                        {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
+                        fill
+                        sizes="128px"
+                        className="object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-2xl rounded-full">
+                      ЖФК
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+                <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
+                  ЦСКА
+                </h2>
+                <Badge variant="outline" className="text-xs">
+                  В гостях
+                </Badge>
+                {isFinished && hasScore && (
+                  <div className={cn(
+                    "text-5xl md:text-6xl font-bold mt-4",
+                    cskaWon ? "text-[var(--cska-blue)]" : isDraw ? "text-muted-foreground" : "text-muted-foreground/50"
+                  )}>
+                    {match.scoreAway}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           <Separator className="my-6" />

@@ -1,58 +1,60 @@
 import { PrismaClient } from '@prisma/client'
 
-// Устанавливаем DATABASE_URL перед созданием клиента
-process.env.DATABASE_URL = 'file:./dev.db'
-
 const prisma = new PrismaClient()
 
-async function checkMatches() {
-  try {
-    console.log('🔍 Проверка матчей в базе данных...\n')
+async function main() {
+  console.log('Проверка матчей в базе данных...\n')
 
-    // Получаем первые 5 матчей
-    const matches = await prisma.match.findMany({
-      take: 5,
-      orderBy: { matchDate: 'desc' },
-      select: {
-        slug: true,
-        opponentName: true,
-        matchDate: true,
-        opponentLogoUrl: true,
-        scoreHome: true,
-        scoreAway: true,
-      },
-    })
+  // Получаем все матчи
+  const matches = await prisma.match.findMany({
+    take: 5,
+    orderBy: { matchDate: 'desc' }
+  })
 
-    console.log(`📊 Найдено матчей: ${matches.length}\n`)
+  console.log(`Всего матчей в базе: ${await prisma.match.count()}`)
+  console.log('\nПоследние 5 матчей:')
+  
+  matches.forEach((match, index) => {
+    console.log(`\n${index + 1}. ${match.opponentName}`)
+    console.log(`   ID: ${match.id}`)
+    console.log(`   Slug: ${match.slug}`)
+    console.log(`   Дата: ${match.matchDate}`)
+    console.log(`   Статус: ${match.status}`)
+  })
 
-    matches.forEach((match, index) => {
-      console.log(`${index + 1}. ${match.opponentName}`)
-      console.log(`   Slug: ${match.slug}`)
-      console.log(`   Дата: ${new Date(match.matchDate).toLocaleDateString('ru-RU')}`)
-      console.log(`   Счёт: ${match.scoreHome ?? '-'} : ${match.scoreAway ?? '-'}`)
-      console.log(`   Лого: ${match.opponentLogoUrl || 'нет'}`)
-      console.log('')
-    })
+  // Проверяем уникальность slug
+  console.log('\n\nПроверка уникальности slug...')
+  const slugs = matches.map(m => m.slug)
+  const uniqueSlugs = new Set(slugs)
+  
+  if (slugs.length === uniqueSlugs.size) {
+    console.log('✓ Все slug уникальны')
+  } else {
+    console.log('✗ Есть дублирующиеся slug!')
+  }
 
-    // Проверяем конкретный матч по slug
-    const testSlug = matches[0]?.slug
-    if (testSlug) {
-      console.log(`\n🔍 Проверка getBySlug("${testSlug}")...`)
-      const match = await prisma.match.findUnique({
-        where: { slug: testSlug },
+  // Пробуем найти матч по slug
+  if (matches.length > 0) {
+    const testSlug = matches[0].slug
+    console.log(`\n\nПопытка найти матч по slug: "${testSlug}"`)
+    
+    try {
+      const foundMatch = await prisma.match.findUnique({
+        where: { slug: testSlug }
       })
-      console.log(match ? '✅ Матч найден!' : '❌ Матч не найден!')
+      
+      if (foundMatch) {
+        console.log('✓ Матч найден успешно!')
+        console.log(`   Соперник: ${foundMatch.opponentName}`)
+      } else {
+        console.log('✗ Матч не найден')
+      }
+    } catch (error) {
+      console.log('✗ Ошибка при поиске:', error.message)
     }
-
-    // Общая статистика
-    const total = await prisma.match.count()
-    console.log(`\n📈 Всего матчей в базе: ${total}`)
-
-  } catch (error) {
-    console.error('❌ Ошибка:', error)
-  } finally {
-    await prisma.$disconnect()
   }
 }
 
-checkMatches()
+main()
+  .catch(console.error)
+  .finally(() => prisma.$disconnect())

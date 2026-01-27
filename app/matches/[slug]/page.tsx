@@ -8,13 +8,14 @@ import { TournamentTable, TournamentTeam } from "@/components/matches/tournament
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface MatchPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateMetadata({ params }: MatchPageProps): Promise<Metadata> {
-  const match = await matchesService.getBySlug(params.slug)
+  const { slug } = await params
+  const match = await matchesService.getBySlug(slug)
 
   if (!match) {
     return {
@@ -65,7 +66,8 @@ async function getTournamentTable(tournament: string, season: string): Promise<T
 }
 
 export default async function MatchPage({ params }: MatchPageProps) {
-  const match = await matchesService.getBySlug(params.slug)
+  const { slug } = await params
+  const match = await matchesService.getBySlug(slug)
 
   if (!match) {
     notFound()

@@ -23,6 +23,16 @@ interface MatchCardProps {
 }
 
 export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
+  // Отладка - выводим на сервере
+  console.log('🎯 MatchCard SERVER - upcomingMatch:', upcomingMatch)
+  console.log('🎯 MatchCard SERVER - lastMatch:', lastMatch)
+  
+  // Отладка - выводим в браузере
+  if (typeof window !== 'undefined') {
+    console.log('🌐 MatchCard BROWSER - upcomingMatch:', upcomingMatch)
+    console.log('🌐 MatchCard BROWSER - lastMatch:', lastMatch)
+  }
+  
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     return new Intl.DateTimeFormat("ru-RU", {
@@ -90,6 +100,7 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                               fill
                               sizes="80px"
                               className="object-contain"
+                              unoptimized
                             />
                           </div>
                         ) : (
@@ -120,6 +131,7 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                               fill
                               sizes="80px"
                               className="object-contain"
+                              unoptimized
                             />
                           </div>
                         ) : (
@@ -193,6 +205,7 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                               fill
                               sizes="80px"
                               className="object-contain"
+                              unoptimized
                             />
                           </div>
                         ) : (
@@ -224,6 +237,7 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                               fill
                               sizes="80px"
                               className="object-contain"
+                              unoptimized
                             />
                           </div>
                         ) : (
