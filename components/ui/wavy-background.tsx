@@ -35,6 +35,12 @@ export const WavyBackground = ({
     ctx: any,
     canvas: any;
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  
   const getSpeed = () => {
     switch (speed) {
       case "slow":
@@ -48,7 +54,9 @@ export const WavyBackground = ({
 
   const init = () => {
     canvas = canvasRef.current;
+    if (!canvas) return;
     ctx = canvas.getContext("2d");
+    if (!ctx) return;
     w = ctx.canvas.width = window.innerWidth;
     h = ctx.canvas.height = window.innerHeight;
     ctx.filter = `blur(${blur}px)`;
@@ -93,11 +101,15 @@ export const WavyBackground = ({
   };
 
   useEffect(() => {
-    init();
+    if (isMounted) {
+      init();
+    }
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
     };
-  }, []);
+  }, [isMounted]);
 
   const [isSafari, setIsSafari] = useState(false);
   useEffect(() => {
