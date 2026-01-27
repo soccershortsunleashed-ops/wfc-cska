@@ -182,13 +182,41 @@ async function extractMatches() {
     const status = determineMatchStatus(hasScore, matchDate);
     
     // Извлекаем логотипы
-    const opponentLogo = $('.header-main-content__guest-team-info')
-      .closest('.header-main-content__team-info-wrapper')
-      .find('.header-main-content__team-logo-wrapper img').attr('src') || '';
+    // Находим все логотипы
+    const $allLogos = $('.header-main-content__team-logo-wrapper img');
     
-    const cskaLogo = $('.header-main-content__host-team-info')
-      .closest('.header-main-content__team-info-wrapper')
-      .find('.header-main-content__team-logo-wrapper img').attr('src') || '';
+    let opponentLogo = '';
+    let cskaLogo = '';
+    
+    // Проходим по всем логотипам и определяем по alt атрибуту
+    $allLogos.each(function() {
+      const alt = $(this).attr('alt') || '';
+      const src = $(this).attr('src') || '';
+      
+      if (alt.includes('ЦСКА') || alt.includes('ЖФК ЦСКА')) {
+        cskaLogo = src;
+      } else if (alt && src) {
+        // Это логотип соперника
+        opponentLogo = src;
+      }
+    });
+    
+    // Если не нашли логотипы, пробуем альтернативный метод
+    if (!opponentLogo || !cskaLogo) {
+      const $logos = $('.header-main-content__team-logo-wrapper');
+      
+      $logos.each(function() {
+        const $img = $(this).find('img');
+        const alt = $img.attr('alt') || '';
+        const src = $img.attr('src') || '';
+        
+        if (alt.includes('ЦСКА') || alt.includes('ЖФК ЦСКА')) {
+          cskaLogo = src;
+        } else if (alt.includes(opponentName)) {
+          opponentLogo = src;
+        }
+      });
+    }
     
     // Извлекаем место проведения
     const stadiumName = normalizeSpace($('.header-main-content__stadium-name').text());

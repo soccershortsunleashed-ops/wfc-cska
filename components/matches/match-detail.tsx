@@ -101,14 +101,16 @@ export function MatchDetail({ match }: MatchDetailProps) {
           <div className="flex items-center justify-between gap-8 mb-8">
             {/* CSKA */}
             <div className="flex flex-col items-center flex-1">
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden relative p-2">
+              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
                 {match.cskaLogoUrl ? (
-                  <Image
-                    {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
-                    fill
-                    sizes="128px"
-                    className="object-contain p-2"
-                  />
+                  <div className="relative w-full h-full">
+                    <Image
+                      {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
+                      fill
+                      sizes="128px"
+                      className="object-contain"
+                    />
+                  </div>
                 ) : (
                   <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-2xl rounded-full">
                     ЖФК
@@ -148,14 +150,16 @@ export function MatchDetail({ match }: MatchDetailProps) {
 
             {/* Opponent */}
             <div className="flex flex-col items-center flex-1">
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden relative p-2">
+              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
                 {match.opponentLogoUrl ? (
-                  <Image
-                    {...getImageProps(match.opponentLogoUrl, match.opponentName)}
-                    fill
-                    sizes="128px"
-                    className="object-contain p-2"
-                  />
+                  <div className="relative w-full h-full">
+                    <Image
+                      {...getImageProps(match.opponentLogoUrl, match.opponentName)}
+                      fill
+                      sizes="128px"
+                      className="object-contain"
+                    />
+                  </div>
                 ) : (
                   <span className="text-3xl font-bold text-muted-foreground">
                     {match.opponentName.substring(0, 2)}

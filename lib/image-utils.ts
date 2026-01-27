@@ -12,11 +12,15 @@ export function getImageProps(
   alt: string,
   options?: { priority?: boolean }
 ) {
+  // Normalize the src URL - add leading slash if missing
+  let normalizedSrc = src || PLACEHOLDER_IMAGE
+  if (normalizedSrc !== PLACEHOLDER_IMAGE && !normalizedSrc.startsWith('/') && !normalizedSrc.startsWith('http')) {
+    normalizedSrc = `/${normalizedSrc}`
+  }
+  
   const baseProps = {
-    src: src || PLACEHOLDER_IMAGE,
+    src: normalizedSrc,
     alt,
-    placeholder: 'blur' as const,
-    blurDataURL: PLACEHOLDER_IMAGE,
   }
 
   // Don't add loading prop if priority is true

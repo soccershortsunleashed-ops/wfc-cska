@@ -67,6 +67,16 @@ export function FocusRail({
   const lastWheelTime = React.useRef<number>(0);
 
   const count = items.length;
+  
+  // Защита от пустого массива
+  if (count === 0) {
+    return (
+      <div className={cn("flex h-[600px] w-full items-center justify-center bg-neutral-950 text-white", className)}>
+        <p className="text-neutral-400">Нет данных для отображения</p>
+      </div>
+    );
+  }
+  
   const activeIndex = wrap(0, count, active);
   const activeItem = items[activeIndex];
 
@@ -153,21 +163,23 @@ export function FocusRail({
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <AnimatePresence mode="popLayout">
-          <motion.div
-            key={`bg-${activeItem.id}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.4 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="absolute inset-0"
-          >
-            <img
-              src={activeItem.imageSrc}
-              alt=""
-              className="h-full w-full object-cover blur-3xl saturate-200"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/50 to-transparent" />
-          </motion.div>
+          {activeItem && (
+            <motion.div
+              key={`bg-${activeItem.id}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.4 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="absolute inset-0"
+            >
+              <img
+                src={activeItem.imageSrc}
+                alt=""
+                className="h-full w-full object-cover blur-3xl saturate-200"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/50 to-transparent" />
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
 
@@ -244,39 +256,41 @@ export function FocusRail({
         {/* Info & Controls */}
         <div className="mx-auto mt-12 flex w-full max-w-4xl flex-col items-center justify-between gap-6 md:flex-row pointer-events-auto">
           <div className="flex flex-1 flex-col items-center text-center md:items-start md:text-left h-32 justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeItem.id}
-                initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
-                transition={{ duration: 0.3 }}
-                className="space-y-2"
-              >
-                {activeItem.meta && (
-                  <span className="text-2xl md:text-3xl font-bold tracking-wide text-emerald-400">
-                    {activeItem.meta}
-                  </span>
-                )}
-                {activeItem.href ? (
-                  <Link href={activeItem.href}>
-                    <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-white hover:text-emerald-400 transition-colors cursor-pointer group">
+            {activeItem && (
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeItem.id}
+                  initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+                  transition={{ duration: 0.3 }}
+                  className="space-y-2"
+                >
+                  {activeItem.meta && (
+                    <span className="text-2xl md:text-3xl font-bold tracking-wide text-emerald-400">
+                      {activeItem.meta}
+                    </span>
+                  )}
+                  {activeItem.href ? (
+                    <Link href={activeItem.href}>
+                      <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-white hover:text-emerald-400 transition-colors cursor-pointer group">
+                        {activeItem.title}
+                        <span className="inline-block ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                      </h2>
+                    </Link>
+                  ) : (
+                    <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-white">
                       {activeItem.title}
-                      <span className="inline-block ml-2 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                     </h2>
-                  </Link>
-                ) : (
-                  <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-white">
-                    {activeItem.title}
-                  </h2>
-                )}
-                {activeItem.description && (
-                  <p className="max-w-md text-neutral-400">
-                    {activeItem.description}
-                  </p>
-                )}
-              </motion.div>
-            </AnimatePresence>
+                  )}
+                  {activeItem.description && (
+                    <p className="max-w-md text-neutral-400">
+                      {activeItem.description}
+                    </p>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            )}
           </div>
 
           <div className="flex items-center gap-4">
