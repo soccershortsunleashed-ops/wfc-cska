@@ -198,11 +198,12 @@ export const matchesService = {
   async getSeasons() {
     const matches = await prisma.match.findMany({
       select: { season: true },
-      distinct: ['season'],
-      orderBy: { season: 'desc' },
+      orderBy: { matchDate: 'desc' },
     })
 
-    return matches.map((m) => m.season)
+    // Получаем уникальные сезоны и сортируем
+    const uniqueSeasons = Array.from(new Set(matches.map((m) => m.season)))
+    return uniqueSeasons.sort((a, b) => b.localeCompare(a))
   },
 
   /**
