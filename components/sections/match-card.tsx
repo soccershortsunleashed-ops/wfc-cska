@@ -82,16 +82,18 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                   <div className="flex items-center justify-between mb-3">
                     {/* Home Team - CSKA */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden p-2">
                         {upcomingMatch.cskaLogoUrl ? (
-                          <Image
-                            {...getImageProps(upcomingMatch.cskaLogoUrl, "ЦСКА")}
-                            fill
-                            sizes="80px"
-                            className="object-cover"
-                          />
+                          <div className="relative w-full h-full">
+                            <Image
+                              {...getImageProps(upcomingMatch.cskaLogoUrl, "ЦСКА")}
+                              fill
+                              sizes="80px"
+                              className="object-contain"
+                            />
+                          </div>
                         ) : (
-                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-sm md:text-base">
+                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-sm md:text-base rounded-full">
                             ЖФК
                           </div>
                         )}
@@ -110,14 +112,16 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
 
                     {/* Away Team */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden p-2">
                         {upcomingMatch.opponentLogoUrl ? (
-                          <Image
-                            {...getImageProps(upcomingMatch.opponentLogoUrl, upcomingMatch.opponentName)}
-                            fill
-                            sizes="80px"
-                            className="object-cover"
-                          />
+                          <div className="relative w-full h-full">
+                            <Image
+                              {...getImageProps(upcomingMatch.opponentLogoUrl, upcomingMatch.opponentName)}
+                              fill
+                              sizes="80px"
+                              className="object-contain"
+                            />
+                          </div>
                         ) : (
                           <span className="text-base md:text-lg font-bold text-muted-foreground">
                             {upcomingMatch.opponentName.substring(0, 2)}
@@ -181,16 +185,18 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
                   <div className="flex items-center justify-between mb-3">
                     {/* Home Team - CSKA */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden p-2">
                         {lastMatch.cskaLogoUrl ? (
-                          <Image
-                            {...getImageProps(lastMatch.cskaLogoUrl, "ЦСКА")}
-                            fill
-                            sizes="80px"
-                            className="object-cover"
-                          />
+                          <div className="relative w-full h-full">
+                            <Image
+                              {...getImageProps(lastMatch.cskaLogoUrl, "ЦСКА")}
+                              fill
+                              sizes="80px"
+                              className="object-contain"
+                            />
+                          </div>
                         ) : (
-                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-sm md:text-base">
+                          <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-sm md:text-base rounded-full">
                             ЖФК
                           </div>
                         )}
@@ -210,14 +216,16 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
 
                     {/* Away Team */}
                     <div className="flex flex-col items-center flex-1">
-                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden relative">
+                      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-muted flex items-center justify-center mb-2 overflow-hidden p-2">
                         {lastMatch.opponentLogoUrl ? (
-                          <Image
-                            {...getImageProps(lastMatch.opponentLogoUrl, lastMatch.opponentName)}
-                            fill
-                            sizes="80px"
-                            className="object-cover"
-                          />
+                          <div className="relative w-full h-full">
+                            <Image
+                              {...getImageProps(lastMatch.opponentLogoUrl, lastMatch.opponentName)}
+                              fill
+                              sizes="80px"
+                              className="object-contain"
+                            />
+                          </div>
                         ) : (
                           <span className="text-base md:text-lg font-bold text-muted-foreground">
                             {lastMatch.opponentName.substring(0, 2)}
