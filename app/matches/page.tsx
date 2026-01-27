@@ -120,7 +120,7 @@ async function MatchesContent({ searchParams }: MatchesPageProps) {
 
 export default function MatchesPage({ searchParams }: MatchesPageProps) {
   return (
-    <div className="container mx-auto py-8 space-y-6">
+    <div className="container mx-auto px-4 md:px-6 py-8 space-y-6">
       {/* Заголовок */}
       <div className="space-y-2">
         <h1 className="text-4xl font-bold">Матчи</h1>

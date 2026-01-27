@@ -88,16 +88,16 @@ export function MatchListItem({ match }: MatchListItemProps) {
               <div className="flex items-center justify-between gap-4">
                 {/* CSKA */}
                 <div className="flex items-center gap-3 flex-1">
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted flex items-center justify-center overflow-hidden relative flex-shrink-0">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted flex items-center justify-center overflow-hidden relative flex-shrink-0 p-1">
                     {match.cskaLogoUrl ? (
                       <Image
                         {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
                         fill
                         sizes="56px"
-                        className="object-cover"
+                        className="object-contain p-1"
                       />
                     ) : (
-                      <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-xs">
+                      <div className="w-full h-full bg-[var(--cska-blue)] flex items-center justify-center text-white font-bold text-xs rounded-full">
                         ЖФК
                       </div>
                     )}
@@ -144,13 +144,13 @@ export function MatchListItem({ match }: MatchListItemProps) {
                       <div className="text-xs text-muted-foreground">В гостях</div>
                     )}
                   </div>
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted flex items-center justify-center overflow-hidden relative flex-shrink-0">
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted flex items-center justify-center overflow-hidden relative flex-shrink-0 p-1">
                     {match.opponentLogoUrl ? (
                       <Image
                         {...getImageProps(match.opponentLogoUrl, match.opponentName)}
                         fill
                         sizes="56px"
-                        className="object-cover"
+                        className="object-contain p-1"
                       />
                     ) : (
                       <span className="text-sm font-bold text-muted-foreground">
