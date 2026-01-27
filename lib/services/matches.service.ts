@@ -177,6 +177,63 @@ export const matchesService = {
   },
 
   /**
+   * Получить 3 матча для главной страницы: последний, ближайший и следующий
+   * Если нет предстоящих матчей, показываем 3 последних завершенных
+   */
+  async getMatchesForHomepage() {
+    const now = new Date()
+    
+    // Ближайший предстоящий матч
+    const nextMatch = await prisma.match.findFirst({
+      where: {
+        matchDate: { gte: now },
+        status: { in: [MatchStatus.SCHEDULED, MatchStatus.LIVE] },
+      },
+      orderBy: { matchDate: 'asc' },
+    })
+
+    // Следующий после ближайшего
+    const futureMatch = await prisma.match.findFirst({
+      where: {
+        matchDate: { gt: nextMatch?.matchDate || now },
+        status: { in: [MatchStatus.SCHEDULED, MatchStatus.LIVE] },
+      },
+      orderBy: { matchDate: 'asc' },
+    })
+
+    // Если есть предстоящие матчи, показываем: последний завершенный + 2 предстоящих
+    if (nextMatch) {
+      const lastMatch = await prisma.match.findFirst({
+        where: {
+          status: MatchStatus.FINISHED,
+        },
+        orderBy: { matchDate: 'desc' },
+      })
+
+      return {
+        lastMatch,
+        nextMatch,
+        futureMatch,
+      }
+    }
+
+    // Если нет предстоящих матчей, показываем 3 последних завершенных
+    const lastMatches = await prisma.match.findMany({
+      where: {
+        status: MatchStatus.FINISHED,
+      },
+      orderBy: { matchDate: 'desc' },
+      take: 3,
+    })
+
+    return {
+      lastMatch: lastMatches[2] || null,      // Самый старый из трех
+      nextMatch: lastMatches[1] || null,      // Средний (выделяем как "центральный")
+      futureMatch: lastMatches[0] || null,    // Самый свежий
+    }
+  },
+
+  /**
    * Получить список всех турниров
    */
   async getTournaments() {

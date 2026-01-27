@@ -130,3 +130,36 @@ enum MatchStatus {
   POSTPONED
   CANCELLED
 }
+
+model StandingsTeam {
+  id              String   @id @default(cuid())
+  
+  // Команда
+  teamName        String
+  teamLogoUrl     String?
+  
+  // Турнир и сезон
+  tournament      String
+  season          String   @default("2025/2026")
+  
+  // Позиция
+  position        Int
+  
+  // Статистика
+  played          Int      @default(0)
+  won             Int      @default(0)
+  drawn           Int      @default(0)
+  lost            Int      @default(0)
+  goalsFor        Int      @default(0)
+  goalsAgainst    Int      @default(0)
+  goalDifference  Int      @default(0)
+  points          Int      @default(0)
+  
+  // Форма (последние 5 матчей: W, D, L)
+  form            String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@unique([teamName, tournament, season])
+}

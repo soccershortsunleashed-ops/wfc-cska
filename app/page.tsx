@@ -63,31 +63,49 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const [matchesData, newsData] = await Promise.all([
-    matchesService.getUpcomingAndLast(),
+    matchesService.getMatchesForHomepage(),
     newsService.list(6),
   ])
 
-  const upcomingMatch = matchesData.upcoming
+  const lastMatch = matchesData.lastMatch
     ? {
-        opponentName: matchesData.upcoming.opponentName,
-        opponentLogoUrl: matchesData.upcoming.opponentLogoUrl,
-        cskaLogoUrl: matchesData.upcoming.cskaLogoUrl,
-        matchDate: matchesData.upcoming.matchDate.toISOString(),
-        venue: matchesData.upcoming.venue,
-        scoreHome: null,
-        scoreAway: null,
+        opponentName: matchesData.lastMatch.opponentName,
+        opponentLogoUrl: matchesData.lastMatch.opponentLogoUrl,
+        cskaLogoUrl: matchesData.lastMatch.cskaLogoUrl,
+        matchDate: matchesData.lastMatch.matchDate.toISOString(),
+        venue: matchesData.lastMatch.venue,
+        scoreHome: matchesData.lastMatch.scoreHome,
+        scoreAway: matchesData.lastMatch.scoreAway,
+        isHome: matchesData.lastMatch.isHome,
+        slug: matchesData.lastMatch.slug,
       }
     : null
 
-  const lastMatch = matchesData.last
+  const nextMatch = matchesData.nextMatch
     ? {
-        opponentName: matchesData.last.opponentName,
-        opponentLogoUrl: matchesData.last.opponentLogoUrl,
-        cskaLogoUrl: matchesData.last.cskaLogoUrl,
-        matchDate: matchesData.last.matchDate.toISOString(),
-        venue: matchesData.last.venue,
-        scoreHome: matchesData.last.scoreHome,
-        scoreAway: matchesData.last.scoreAway,
+        opponentName: matchesData.nextMatch.opponentName,
+        opponentLogoUrl: matchesData.nextMatch.opponentLogoUrl,
+        cskaLogoUrl: matchesData.nextMatch.cskaLogoUrl,
+        matchDate: matchesData.nextMatch.matchDate.toISOString(),
+        venue: matchesData.nextMatch.venue,
+        scoreHome: null,
+        scoreAway: null,
+        isHome: matchesData.nextMatch.isHome,
+        slug: matchesData.nextMatch.slug,
+      }
+    : null
+
+  const futureMatch = matchesData.futureMatch
+    ? {
+        opponentName: matchesData.futureMatch.opponentName,
+        opponentLogoUrl: matchesData.futureMatch.opponentLogoUrl,
+        cskaLogoUrl: matchesData.futureMatch.cskaLogoUrl,
+        matchDate: matchesData.futureMatch.matchDate.toISOString(),
+        venue: matchesData.futureMatch.venue,
+        scoreHome: null,
+        scoreAway: null,
+        isHome: matchesData.futureMatch.isHome,
+        slug: matchesData.futureMatch.slug,
       }
     : null
 
@@ -102,8 +120,12 @@ export default async function Home() {
 
   return (
     <div>
-      <Hero upcomingMatch={upcomingMatch} />
-      <MatchCard upcomingMatch={upcomingMatch} lastMatch={lastMatch} />
+      <Hero upcomingMatch={nextMatch} />
+      <MatchCard 
+        lastMatch={lastMatch} 
+        nextMatch={nextMatch} 
+        futureMatch={futureMatch} 
+      />
       <NewsSection news={news} />
       <TeamFocusRail />
       <Sponsors />
