@@ -83,21 +83,50 @@ model News {
 }
 
 model Match {
-  id              String    @id @default(cuid())
+  id              String      @id @default(cuid())
+  slug            String      @unique
   type            MatchType
+  status          MatchStatus @default(SCHEDULED)
+  
+  // Команды
   opponentName    String
   opponentLogoUrl String?
   cskaLogoUrl     String?
+  isHome          Boolean     @default(true)
+  
+  // Дата и место
   matchDate       DateTime
   venue           String?
+  stadium         String?
+  
+  // Счет
   scoreHome       Int?
   scoreAway       Int?
+  
+  // Турнир и сезон
   tournament      String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  season          String      @default("2025/2026")
+  round           String?
+  
+  // Дополнительная информация
+  attendance      Int?
+  referee         String?
+  highlights      String?
+  description     String?
+  
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
 }
 
 enum MatchType {
   UPCOMING
   LAST
+}
+
+enum MatchStatus {
+  SCHEDULED
+  LIVE
+  FINISHED
+  POSTPONED
+  CANCELLED
 }
