@@ -51,7 +51,10 @@ export function MatchCard({ upcomingMatch, lastMatch }: MatchCardProps) {
   const isSingleMatch = matchCount === 1
 
   return (
-    <section className="py-8 md:py-12 bg-muted/30">
+    <section className="relative py-8 md:py-12 bg-muted/30">
+      {/* Плавный градиентный переход от Hero */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#000814] via-[#0033A0]/20 to-transparent pointer-events-none" />
+      
       <Container>
         <div className="text-center mb-6">
           <h2 className="text-xl md:text-2xl font-bold mb-1">Матчи</h2>

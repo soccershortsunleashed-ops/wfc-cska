@@ -22,7 +22,10 @@ export async function TeamFocusRail() {
   }))
 
   return (
-    <section className="w-full">
+    <section className="relative w-full">
+      {/* Плавный градиентный переход от белого к черному через синий */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background via-[#0033A0]/10 to-transparent pointer-events-none z-10" />
+      
       <FocusRail 
         items={railItems}
         autoPlay={true}
