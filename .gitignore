@@ -66,6 +66,7 @@ dev.db-journal
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.kiro/
 .idea
 *.swp
 *.swo
@@ -98,6 +99,10 @@ backup_*/
 # logs
 logs
 *.log
+
+# local tools / artifacts
+bin/
+rustat_api_map.json
 
 # Optional npm cache directory
 .npm
@@ -151,3 +156,7 @@ public
 # Temporary folders
 tmp/
 temp/
+
+# media artifacts
+screenshots/
+videos/
