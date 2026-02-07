@@ -1,18 +1,20 @@
 import prisma from '../db/prisma'
-import { Position, Team } from '@prisma/client'
+import { Position, PlayerTeam } from '@prisma/client'
 
 export interface PlayersFilters {
   position?: Position
   q?: string
   sort?: 'number' | 'name'
-  team?: Team
+  team?: PlayerTeam
 }
 
 export const playersService = {
   async list(filters: PlayersFilters = {}) {
     const { position, q, sort = 'number', team } = filters
 
-    const where: any = {}
+    const where: any = {
+      leftClub: false // Не показываем ушедших игроков
+    }
 
     if (position) {
       where.position = position
@@ -22,9 +24,9 @@ export const playersService = {
       where.team = team
     }
 
-    const orderBy: any = sort === 'number' 
-      ? { number: 'asc' }
-      : [{ lastName: 'asc' }, { firstName: 'asc' }]
+    const orderBy = sort === 'number' 
+      ? { number: 'asc' as const }
+      : { lastName: 'asc' as const }
 
     let players = await prisma.player.findMany({
       where,

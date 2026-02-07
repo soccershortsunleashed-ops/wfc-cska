@@ -2,31 +2,57 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Match, MatchStatus } from "@prisma/client"
+import { Match, MatchStatus, FootballTeam } from "@prisma/client"
 import { Calendar, MapPin, Trophy, Clock } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { getImageProps } from "@/lib/image-utils"
 import { cn } from "@/lib/utils"
 
+type MatchWithTeams = Match & {
+  homeTeam?: FootballTeam | null
+  awayTeam?: FootballTeam | null
+  // Старые поля для обратной совместимости
+  opponentName?: string | null
+  opponentLogoUrl?: string | null
+  cskaLogoUrl?: string | null
+  isHome?: boolean | null
+}
+
 interface MatchListItemProps {
-  match: Match
+  match: MatchWithTeams
 }
 
 export function MatchListItem({ match }: MatchListItemProps) {
-  const formatDate = (date: Date) => {
+  // Определяем команды (новая структура или старая для обратной совместимости)
+  const isCskaHome = match.homeTeam?.name === 'ЦСКА' || match.isHome === true
+  const cskaTeam = isCskaHome ? match.homeTeam : match.awayTeam
+  const opponentTeam = isCskaHome ? match.awayTeam : match.homeTeam
+  
+  // Формируем данные для отображения
+  const opponentName = opponentTeam?.name || match.opponentName || 'Соперник'
+  const cskaLogoUrl = cskaTeam?.logoFileName 
+    ? `/teams/${cskaTeam.season}/${cskaTeam.competition}/${cskaTeam.logoFileName}`
+    : match.cskaLogoUrl || null
+  const opponentLogoUrl = opponentTeam?.logoFileName
+    ? `/teams/${opponentTeam.season}/${opponentTeam.competition}/${opponentTeam.logoFileName}`
+    : match.opponentLogoUrl || null
+
+  const formatDate = (date: Date | string) => {
+    const dateObj = typeof date === 'string' ? new Date(date) : date
     return new Intl.DateTimeFormat("ru-RU", {
       day: "numeric",
       month: "long",
       year: "numeric",
-    }).format(date)
+    }).format(dateObj)
   }
 
-  const formatTime = (date: Date) => {
+  const formatTime = (date: Date | string) => {
+    const dateObj = typeof date === 'string' ? new Date(date) : date
     return new Intl.DateTimeFormat("ru-RU", {
       hour: "2-digit",
       minute: "2-digit",
-    }).format(date)
+    }).format(dateObj)
   }
 
   const getStatusBadge = (status: MatchStatus) => {
@@ -64,7 +90,7 @@ export function MatchListItem({ match }: MatchListItemProps) {
     }
   }
 
-  const matchDate = new Date(match.matchDate)
+  const matchDate = typeof match.matchDate === 'string' ? new Date(match.matchDate) : match.matchDate
   const isFinished = match.status === MatchStatus.FINISHED
   const hasScore = match.scoreHome !== null && match.scoreAway !== null
 
@@ -87,14 +113,14 @@ export function MatchListItem({ match }: MatchListItemProps) {
             <div className="flex-1">
               <div className="flex items-center justify-between gap-4">
                 {/* Home Team (left side) */}
-                {match.isHome ? (
+                {isCskaHome ? (
                   // ЦСКА дома - слева
                   <div className="flex items-center gap-3 flex-1">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted flex items-center justify-center overflow-hidden flex-shrink-0 p-2">
-                      {match.cskaLogoUrl ? (
+                      {cskaLogoUrl ? (
                         <div className="relative w-full h-full">
                           <Image
-                            {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
+                            {...getImageProps(cskaLogoUrl, "ЦСКА")}
                             fill
                             sizes="56px"
                             className="object-contain"
@@ -115,10 +141,10 @@ export function MatchListItem({ match }: MatchListItemProps) {
                   // Соперник дома - слева
                   <div className="flex items-center gap-3 flex-1">
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted flex items-center justify-center overflow-hidden flex-shrink-0 p-2">
-                      {match.opponentLogoUrl ? (
+                      {opponentLogoUrl ? (
                         <div className="relative w-full h-full">
                           <Image
-                            {...getImageProps(match.opponentLogoUrl, match.opponentName)}
+                            {...getImageProps(opponentLogoUrl, opponentName)}
                             fill
                             sizes="56px"
                             className="object-contain"
@@ -126,12 +152,12 @@ export function MatchListItem({ match }: MatchListItemProps) {
                         </div>
                       ) : (
                         <span className="text-sm font-bold text-muted-foreground">
-                          {match.opponentName.substring(0, 2)}
+                          {opponentName.substring(0, 2)}
                         </span>
                       )}
                     </div>
                     <div className="flex-1">
-                      <div className="font-semibold text-sm md:text-base">{match.opponentName}</div>
+                      <div className="font-semibold text-sm md:text-base">{opponentName}</div>
                       <div className="text-xs text-muted-foreground">Дома</div>
                     </div>
                   </div>
@@ -164,18 +190,18 @@ export function MatchListItem({ match }: MatchListItemProps) {
                 </div>
 
                 {/* Away Team (right side) */}
-                {match.isHome ? (
+                {isCskaHome ? (
                   // Соперник в гостях - справа
                   <div className="flex items-center gap-3 flex-1 justify-end">
                     <div className="flex-1 text-right">
-                      <div className="font-semibold text-sm md:text-base">{match.opponentName}</div>
+                      <div className="font-semibold text-sm md:text-base">{opponentName}</div>
                       <div className="text-xs text-muted-foreground">В гостях</div>
                     </div>
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted flex items-center justify-center overflow-hidden flex-shrink-0 p-2">
-                      {match.opponentLogoUrl ? (
+                      {opponentLogoUrl ? (
                         <div className="relative w-full h-full">
                           <Image
-                            {...getImageProps(match.opponentLogoUrl, match.opponentName)}
+                            {...getImageProps(opponentLogoUrl, opponentName)}
                             fill
                             sizes="56px"
                             className="object-contain"
@@ -183,7 +209,7 @@ export function MatchListItem({ match }: MatchListItemProps) {
                         </div>
                       ) : (
                         <span className="text-sm font-bold text-muted-foreground">
-                          {match.opponentName.substring(0, 2)}
+                          {opponentName.substring(0, 2)}
                         </span>
                       )}
                     </div>
@@ -196,10 +222,10 @@ export function MatchListItem({ match }: MatchListItemProps) {
                       <div className="text-xs text-muted-foreground">В гостях</div>
                     </div>
                     <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-muted flex items-center justify-center overflow-hidden flex-shrink-0 p-2">
-                      {match.cskaLogoUrl ? (
+                      {cskaLogoUrl ? (
                         <div className="relative w-full h-full">
                           <Image
-                            {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
+                            {...getImageProps(cskaLogoUrl, "ЦСКА")}
                             fill
                             sizes="56px"
                             className="object-contain"

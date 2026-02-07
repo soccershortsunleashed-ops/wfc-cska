@@ -21,8 +21,32 @@ model Player {
   heightCm    Int?
   weightKg    Int?
   photoUrl    String?
-  team        Team         @default(MAIN)
+  team        PlayerTeam   @default(MAIN)
   stats       PlayerStats?
+  
+  // RuStat интеграция
+  rustatId    Int?         @unique // ID игрока в RuStat API (уникальный)
+  rustatName  String?      // Имя в RuStat (для сопоставления)
+  
+  // Статус игрока
+  leftClub    Boolean      @default(false) // Ушел в другой клуб
+  
+  // Дополнительные данные из ТЗ
+  contract        String?      // Контракт до
+  nationalTeam    String?      // Сборная
+  positions       String?      // JSON с позициями и процентами
+  strongFoot      String?      // Сильная нога
+  timeOnFieldPct  Float?       // Время на поле %
+  
+  // Связи
+  matchStats      PlayerMatchStats[]
+  shotsSummary    PlayerShotsSummary?
+  shotEvents      ShotEvent[]
+  
+  // Адаптация карточки
+  availableSections String?    // JSON массив доступных секций
+  missingSections   String?    // JSON массив отсутствующих секций
+  
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 }
@@ -42,14 +66,49 @@ model PlayerStats {
   yellowCards     Int      @default(0)
   redCards        Int      @default(0)
   
+  // Удары
+  shots           Int      @default(0)
+  shotsOnTarget   Int      @default(0)
+  shotAccuracy    Float?   // %
+  
+  // Передачи
+  passes          Int      @default(0)
+  passesAccurate  Int      @default(0)
+  passAccuracy    Float?   // %
+  keyPasses       Int      @default(0)
+  
+  // Единоборства
+  duels           Int      @default(0)
+  duelsWon        Int      @default(0)
+  duelWinRate     Float?   // %
+  
+  // Защита
+  interceptions   Int      @default(0)
+  tackles         Int      @default(0)
+  tacklesWon      Int      @default(0)
+  blocks          Int      @default(0)
+  clearances      Int      @default(0)
+  
+  // Атака
+  dribbles        Int      @default(0)
+  dribblesSuccess Int      @default(0)
+  foulsDrawn      Int      @default(0)
+  foulsCommitted  Int      @default(0)
+  
   // Для вратарей
   cleanSheets     Int?
   goalsConceded   Int?
   saves           Int?
+  savePercentage  Float?   // %
   
   // Дополнительная статистика
-  shotsOnTarget   Int?
-  passAccuracy    Float?
+  penaltiesScored Int      @default(0)
+  penaltiesMissed Int      @default(0)
+  
+  // RuStat интеграция
+  rustatPlayerId  Int?     // ID игрока в RuStat
+  rustatSynced    Boolean  @default(false)
+  rustatSyncedAt  DateTime?
   
   // Текущий сезон
   season          String   @default("2025/2026")
@@ -65,7 +124,7 @@ enum Position {
   FORWARD
 }
 
-enum Team {
+enum PlayerTeam {
   MAIN
   YOUTH
   JUNIOR
@@ -76,8 +135,12 @@ model News {
   slug            String   @unique
   title           String
   excerpt         String
+  content         String   // HTML content
   coverImageUrl   String?
   publishedAt     DateTime
+  category        String   @default("novosti")
+  originalUrl     String?  // URL from original site
+  type            String?  // featured, column, list
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
@@ -88,11 +151,17 @@ model Match {
   type            MatchType
   status          MatchStatus @default(SCHEDULED)
   
-  // Команды
-  opponentName    String
+  // Команды (связи)
+  homeTeamId      String?
+  homeTeam        FootballTeam? @relation("HomeTeam", fields: [homeTeamId], references: [id])
+  awayTeamId      String?
+  awayTeam        FootballTeam? @relation("AwayTeam", fields: [awayTeamId], references: [id])
+  
+  // Старые поля (временно для миграции)
+  opponentName    String?
   opponentLogoUrl String?
   cskaLogoUrl     String?
-  isHome          Boolean     @default(true)
+  isHome          Boolean?    @default(true)
   
   // Дата и место
   matchDate       DateTime
@@ -114,8 +183,22 @@ model Match {
   highlights      String?
   description     String?
   
+  // RuStat интеграция
+  rustatId        Int?        // ID матча в RuStat API
+  rustatSynced    Boolean     @default(false)
+  rustatData      String?     // JSON кэш данных из RuStat
+  rustatSyncedAt  DateTime?   // Время последней синхронизации
+  
+  // Связи со статистикой
+  playerStats     PlayerMatchStats[]
+  shotEvents      ShotEvent[]
+  
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
+  
+  @@index([homeTeamId])
+  @@index([awayTeamId])
+  @@index([matchDate])
 }
 
 enum MatchType {
@@ -134,8 +217,12 @@ enum MatchStatus {
 model StandingsTeam {
   id              String   @id @default(cuid())
   
-  // Команда
-  teamName        String
+  // Команда (связь)
+  teamId          String?
+  team            FootballTeam? @relation(fields: [teamId], references: [id])
+  
+  // Старые поля (временно для миграции)
+  teamName        String?
   teamLogoUrl     String?
   
   // Турнир и сезон
@@ -161,5 +248,186 @@ model StandingsTeam {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
   
-  @@unique([teamName, tournament, season])
+  @@index([tournament, season])
+  @@index([teamId])
+}
+
+model FootballTeam {
+  id          String   @id @default(cuid())
+  
+  // Названия
+  name        String             // Основное название (например, "Спартак")
+  fullName    String             // Полное название (например, "Спартак Москва")
+  shortName   String?            // Краткое название (например, "СПА")
+  aliases     String?            // JSON массив альтернативных названий
+  
+  // Визуальная информация
+  logoFileName String?           // Имя файла логотипа (например, "spartak.png")
+  colors      String?            // JSON с цветами команды
+  
+  // Информация о команде
+  city        String?            // Город (например, "Москва")
+  stadium     String?            // Домашний стадион (например, "ВЭБ Арена")
+  founded     Int?               // Год основания
+  website     String?            // Официальный сайт
+  
+  // Категоризация
+  season      String             // Сезон (например, "2025/2026")
+  competition String             // Турнир: "superliga" или "friendly"
+  
+  // Связи
+  homeMatches Match[]  @relation("HomeTeam")
+  awayMatches Match[]  @relation("AwayTeam")
+  standings   StandingsTeam[]
+  
+  // Интеграции
+  rustatId    Int?               // ID команды в RuStat
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([name, season, competition])
+  @@index([season, competition])
+  @@index([rustatId])
+}
+
+
+// ============================================================================
+// Новые модели для детальной статистики (ТЗ от 31.01.2026)
+// ============================================================================
+
+// Статистика игрока в конкретном матче
+model PlayerMatchStats {
+  id              String   @id @default(cuid())
+  playerId        String
+  player          Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  matchId         String
+  match           Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  
+  // Данные участия
+  minutesPlayed   Int      @default(0)
+  startSubstitute String?  // "start" | "substitute"
+  position        String?  // Позиция в матче
+  rating          Float?   // Рейтинг в матче
+  
+  // Статистика (основные показатели)
+  goals           Int      @default(0)
+  assists         Int      @default(0)
+  shots           Int      @default(0)
+  shotsOnTarget   Int      @default(0)
+  passes          Int      @default(0)
+  passesAccurate  Int      @default(0)
+  keyPasses       Int      @default(0)
+  duels           Int      @default(0)
+  duelsWon        Int      @default(0)
+  interceptions   Int      @default(0)
+  tackles         Int      @default(0)
+  blocks          Int      @default(0)
+  clearances      Int      @default(0)
+  yellowCards     Int      @default(0)
+  redCards        Int      @default(0)
+  
+  // RuStat данные
+  rustatMatchId   Int?
+  rustatData      String?  // JSON с полными данными из API
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@unique([playerId, matchId])
+  @@index([matchId])
+  @@index([playerId])
+}
+
+// Агрегированная статистика ударов игрока
+model PlayerShotsSummary {
+  id              String   @id @default(cuid())
+  playerId        String   @unique
+  player          Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  
+  // Агрегированные данные
+  shots           Int      @default(0)
+  goals           Int      @default(0)
+  shotsOnTarget   Int      @default(0)
+  shotsOffTarget  Int      @default(0)
+  shotsBlocked    Int      @default(0)
+  shotsHitPost    Int      @default(0)
+  xG              Float    @default(0)
+  xGConversion    Float?   // % конверсии xG в голы
+  
+  // Пенальти
+  penalties       Int      @default(0)
+  penaltiesScored Int      @default(0)
+  penaltiesMissed Int      @default(0)
+  
+  // Метаданные
+  season          String   @default("2025/2026")
+  lastUpdated     DateTime @updatedAt
+  
+  createdAt       DateTime @default(now())
+}
+
+// События ударов (Shot Map)
+model ShotEvent {
+  id              String   @id @default(cuid())
+  playerId        String
+  player          Player   @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  matchId         String?
+  match           Match?   @relation(fields: [matchId], references: [id], onDelete: SetNull)
+  
+  // Данные удара
+  minute          Int
+  x               Float    // Координата X (0-100)
+  y               Float    // Координата Y (0-100)
+  xG              Float    // Expected Goals
+  outcome         String   // "goal" | "saved" | "missed" | "blocked" | "post"
+  bodyPart        String?  // "left_foot" | "right_foot" | "head" | "other"
+  situation       String?  // "open_play" | "corner" | "free_kick" | "penalty"
+  
+  // Дополнительные данные
+  assisted        Boolean  @default(false)
+  fastBreak       Boolean  @default(false)
+  
+  // RuStat данные
+  rustatShotId    Int?
+  rustatEventData String?  // JSON с полными данными события
+  
+  createdAt       DateTime @default(now())
+  
+  @@unique([playerId, matchId, minute, x, y])
+  @@index([playerId])
+  @@index([matchId])
+}
+
+// Метаданные синхронизации
+model SyncMetadata {
+  id              String   @id @default(cuid())
+  entityType      String   // "players" | "matches" | "shots" | "stats"
+  entityId        String?  // ID конкретной сущности (опционально)
+  
+  // Статус синхронизации
+  status          String   // "success" | "partial" | "failed" | "in_progress"
+  lastSyncAt      DateTime
+  nextSyncAt      DateTime?
+  
+  // Статистика
+  itemsProcessed  Int      @default(0)
+  itemsAdded      Int      @default(0)
+  itemsUpdated    Int      @default(0)
+  itemsSkipped    Int      @default(0)
+  itemsFailed     Int      @default(0)
+  
+  // Ошибки
+  errors          String?  // JSON массив ошибок
+  errorMessage    String?  // Последнее сообщение об ошибке
+  
+  // Метаданные
+  duration        Int?     // Длительность синхронизации в мс
+  rustatToken     String?  // Токен использованный для синхронизации (для отладки)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([entityType, status])
+  @@index([lastSyncAt])
 }

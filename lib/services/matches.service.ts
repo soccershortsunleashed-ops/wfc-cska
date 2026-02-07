@@ -34,7 +34,7 @@ export const matchesService = {
 
     // Применяем фильтры
     if (filters.tournament) {
-      where.tournament = { contains: filters.tournament, mode: 'insensitive' }
+      where.tournament = { contains: filters.tournament }
     }
     if (filters.season) {
       where.season = filters.season
@@ -46,12 +46,16 @@ export const matchesService = {
       where.isHome = filters.isHome
     }
     if (filters.opponentName) {
-      where.opponentName = { contains: filters.opponentName, mode: 'insensitive' }
+      where.opponentName = { contains: filters.opponentName }
     }
 
     const [matches, total] = await Promise.all([
       prisma.match.findMany({
         where,
+        include: {
+          homeTeam: true,
+          awayTeam: true,
+        },
         orderBy: { [orderBy]: orderDirection },
         skip: (page - 1) * pageSize,
         take: pageSize,
@@ -76,6 +80,10 @@ export const matchesService = {
   async getById(id: string) {
     return prisma.match.findUnique({
       where: { id },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
+      },
     })
   },
 
@@ -85,6 +93,10 @@ export const matchesService = {
   async getBySlug(slug: string) {
     return prisma.match.findUnique({
       where: { slug },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
+      },
     })
   },
 
@@ -119,6 +131,10 @@ export const matchesService = {
         matchDate: { gte: now },
         status: { in: [MatchStatus.SCHEDULED, MatchStatus.LIVE] },
       },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
+      },
       orderBy: { matchDate: 'asc' },
       take: limit,
     })
@@ -131,6 +147,10 @@ export const matchesService = {
     return prisma.match.findMany({
       where: {
         status: MatchStatus.FINISHED,
+      },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
       },
       orderBy: { matchDate: 'desc' },
       take: limit,
@@ -148,6 +168,10 @@ export const matchesService = {
         matchDate: { gte: now },
         status: { in: [MatchStatus.SCHEDULED, MatchStatus.LIVE] },
       },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
+      },
       orderBy: { matchDate: 'asc' },
     })
   },
@@ -159,6 +183,10 @@ export const matchesService = {
     return prisma.match.findFirst({
       where: {
         status: MatchStatus.FINISHED,
+      },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
       },
       orderBy: { matchDate: 'desc' },
     })
@@ -189,6 +217,10 @@ export const matchesService = {
         matchDate: { gte: now },
         status: { in: [MatchStatus.SCHEDULED, MatchStatus.LIVE] },
       },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
+      },
       orderBy: { matchDate: 'asc' },
     })
 
@@ -198,6 +230,10 @@ export const matchesService = {
         matchDate: { gt: nextMatch?.matchDate || now },
         status: { in: [MatchStatus.SCHEDULED, MatchStatus.LIVE] },
       },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
+      },
       orderBy: { matchDate: 'asc' },
     })
 
@@ -206,6 +242,10 @@ export const matchesService = {
       const lastMatch = await prisma.match.findFirst({
         where: {
           status: MatchStatus.FINISHED,
+        },
+        include: {
+          homeTeam: true,
+          awayTeam: true,
         },
         orderBy: { matchDate: 'desc' },
       })
@@ -221,6 +261,10 @@ export const matchesService = {
     const lastMatches = await prisma.match.findMany({
       where: {
         status: MatchStatus.FINISHED,
+      },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
       },
       orderBy: { matchDate: 'desc' },
       take: 3,
@@ -270,7 +314,7 @@ export const matchesService = {
     const where: Prisma.MatchWhereInput = {}
 
     if (filters?.tournament) {
-      where.tournament = { contains: filters.tournament, mode: 'insensitive' }
+      where.tournament = { contains: filters.tournament }
     }
     if (filters?.season) {
       where.season = filters.season

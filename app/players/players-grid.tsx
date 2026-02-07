@@ -1,5 +1,5 @@
 import { playersService } from "@/lib/services/players.service"
-import { Position, Team } from "@prisma/client"
+import { Position, PlayerTeam } from "@prisma/client"
 import { PlayersCarousel } from "@/components/players"
 
 interface PlayersGridProps {
@@ -20,9 +20,9 @@ export async function PlayersGrid({ searchParams }: PlayersGridProps) {
         : undefined,
     team:
       searchParams.team && searchParams.team !== "all"
-        ? (searchParams.team as Team)
+        ? (searchParams.team.toUpperCase() as PlayerTeam)
         : searchParams.team === undefined
-          ? Team.MAIN // Default to MAIN only when no param is provided
+          ? PlayerTeam.MAIN // Default to MAIN only when no param is provided
           : undefined, // Show all teams when explicitly set to "all"
     sort: (searchParams.sort as "number" | "name") || "number",
     q: searchParams.q || undefined,

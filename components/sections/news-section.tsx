@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Calendar } from "lucide-react"
@@ -5,7 +7,8 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Container } from "@/components/layout/container"
-import { getImageProps, IMAGE_SIZES, getResponsiveSizes } from "@/lib/image-utils"
+import { getImageProps, IMAGE_SIZES, getResponsiveSizes, PLACEHOLDER_IMAGE } from "@/lib/image-utils"
+import { useState } from "react"
 
 interface News {
   id: string
@@ -72,51 +75,7 @@ export function NewsSection({ news }: NewsSectionProps) {
         <div className="grid gap-6 lg:grid-cols-2 mb-6">
           {/* Featured News */}
           {featuredNews && (
-            <Card className="lg:row-span-2 overflow-hidden group border-hover gpu-accelerated">
-                <Link href={`/news/${featuredNews.slug}`} className="focus-ring">
-                  <div className="relative h-64 md:h-80 lg:min-h-[600px] overflow-hidden bg-muted">
-                    {featuredNews.coverImageUrl ? (
-                      <Image
-                        {...getImageProps(featuredNews.coverImageUrl, featuredNews.title, { priority: true })}
-                        fill
-                        sizes={getResponsiveSizes('newsFeatured')}
-                        className="object-cover image-hover"
-                        priority
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--cska-blue)] to-[var(--cska-blue)]/80">
-                        <span className="text-6xl font-bold text-white/20">ЖФК</span>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                    
-                    {/* Badge */}
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-[var(--cska-red)] text-white hover:bg-[var(--cska-red)]/90">
-                        Главная новость
-                      </Badge>
-                    </div>
-
-                    {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <div className="flex items-center gap-2 mb-3 text-sm">
-                        <Calendar className="h-4 w-4" />
-                        <span>{getTimeAgo(featuredNews.publishedAt)}</span>
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-bold mb-3 line-clamp-2">
-                        {featuredNews.title}
-                      </h3>
-                      <p className="text-gray-200 line-clamp-2 mb-4">
-                        {featuredNews.excerpt}
-                      </p>
-                      <span className="inline-flex items-center text-sm font-medium group-hover:gap-2 transition-all">
-                        Читать далее
-                        <ArrowRight className="ml-1 h-4 w-4 icon-slide" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </Card>
+            <FeaturedNewsCard news={featuredNews} getTimeAgo={getTimeAgo} />
           )}
 
           {/* Other News Cards */}
@@ -151,6 +110,8 @@ export function NewsSection({ news }: NewsSectionProps) {
 }
 
 function NewsCard({ news }: { news: News }) {
+  const [imageError, setImageError] = useState(false)
+  
   const getTimeAgo = (dateString: string) => {
     const date = new Date(dateString)
     const now = new Date()
@@ -179,12 +140,13 @@ function NewsCard({ news }: { news: News }) {
       <Link href={`/news/${news.slug}`} className="focus-ring">
         <CardHeader className="p-0">
           <div className="relative h-48 overflow-hidden bg-muted">
-            {news.coverImageUrl ? (
+            {news.coverImageUrl && !imageError ? (
               <Image
                 {...getImageProps(news.coverImageUrl, news.title)}
                 fill
                 sizes={getResponsiveSizes('newsCard')}
                 className="object-cover image-hover"
+                onError={() => setImageError(true)}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-muted to-muted/50">
@@ -211,6 +173,60 @@ function NewsCard({ news }: { news: News }) {
             <ArrowRight className="ml-1 h-4 w-4 icon-slide" />
           </span>
         </CardFooter>
+      </Link>
+    </Card>
+  )
+}
+
+
+function FeaturedNewsCard({ news, getTimeAgo }: { news: News; getTimeAgo: (date: string) => string }) {
+  const [imageError, setImageError] = useState(false)
+  
+  return (
+    <Card className="lg:row-span-2 overflow-hidden group border-hover gpu-accelerated">
+      <Link href={`/news/${news.slug}`} className="focus-ring">
+        <div className="relative h-64 md:h-80 lg:min-h-[600px] overflow-hidden bg-muted">
+          {news.coverImageUrl && !imageError ? (
+            <Image
+              {...getImageProps(news.coverImageUrl, news.title, { priority: true })}
+              fill
+              sizes={getResponsiveSizes('newsFeatured')}
+              className="object-cover image-hover"
+              priority
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[var(--cska-blue)] to-[var(--cska-blue)]/80">
+              <span className="text-6xl font-bold text-white/20">ЖФК</span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          
+          {/* Badge */}
+          <div className="absolute top-4 left-4">
+            <Badge className="bg-[var(--cska-red)] text-white hover:bg-[var(--cska-red)]/90">
+              Главная новость
+            </Badge>
+          </div>
+
+          {/* Content */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+            <div className="flex items-center gap-2 mb-3 text-sm">
+              <Calendar className="h-4 w-4" />
+              <span>{getTimeAgo(news.publishedAt)}</span>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold mb-3 line-clamp-2">
+              {news.title}
+            </h3>
+            <p className="text-gray-200 line-clamp-2 mb-4">
+              {news.excerpt}
+            </p>
+            <span className="inline-flex items-center text-sm font-medium group-hover:gap-2 transition-all">
+              Читать далее
+              <ArrowRight className="ml-1 h-4 w-4 icon-slide" />
+            </span>
+          </div>
+        </div>
       </Link>
     </Card>
   )

@@ -48,11 +48,28 @@ const navigationItems = [
         href: "/players?team=junior",
         description: "Юниорский состав",
       },
+      {
+        title: "Тренерский штаб",
+        href: "/team/coaching-staff",
+        description: "Тренеры и специалисты",
+      },
     ],
   },
   {
     title: "Матчи",
     href: "/matches",
+    items: [
+      {
+        title: "Расписание и результаты",
+        href: "/matches",
+        description: "Все матчи команды",
+      },
+      {
+        title: "Турнирная таблица",
+        href: "/standings",
+        description: "Положение в турнирах",
+      },
+    ],
   },
   {
     title: "Новости",

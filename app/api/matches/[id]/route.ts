@@ -3,10 +3,11 @@ import { matchesService } from '@/lib/services/matches.service'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const match = await matchesService.getById(params.id)
+    const { id } = await params
+    const match = await matchesService.getById(id)
 
     if (!match) {
       return NextResponse.json(

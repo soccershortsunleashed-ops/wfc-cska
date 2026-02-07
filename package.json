@@ -12,7 +12,10 @@
     "copy-assets": "node scripts/copy-assets.mjs",
     "seed-extracted": "tsx prisma/seed-from-extracted.ts",
     "setup-from-site": "npm run extract-seed && npm run extract-matches && npm run copy-assets && npm run seed-extracted",
-    "update-featured-news": "node scripts/update-first-news.mjs"
+    "update-featured-news": "node scripts/update-first-news.mjs",
+    "seed:safe": "tsx prisma/seed-safe.ts",
+    "check:db": "node scripts/check-db-data.mjs",
+    "backup:db": "node scripts/backup-db.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

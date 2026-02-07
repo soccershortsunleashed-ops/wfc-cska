@@ -3,13 +3,16 @@ import { FocusRail, FocusRailItem } from "@/components/ui/focus-rail"
 import { translatePosition } from "@/lib/utils/position-translator"
 
 export async function TeamFocusRail() {
-  // Получаем первых 12 игроков основного состава
+  // Получаем игроков основного состава с фотографиями
   const players = await playersService.list({
     team: "MAIN",
     sort: "number",
   })
 
-  const featuredPlayers = players.slice(0, 12)
+  // Фильтруем только игроков с фото и берем первых 12
+  const featuredPlayers = players
+    .filter(player => player.photoUrl && player.photoUrl !== "/placeholder.svg")
+    .slice(0, 12)
 
   // Преобразуем данные игроков в формат FocusRailItem
   const railItems: FocusRailItem[] = featuredPlayers.map((player) => ({

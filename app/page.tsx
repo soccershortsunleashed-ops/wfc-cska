@@ -5,7 +5,8 @@ import { NewsSection } from "@/components/sections/news-section"
 import { TeamFocusRail } from "@/components/sections/team-focus-rail"
 import { Sponsors } from "@/components/sections/sponsors"
 import { matchesService } from "@/lib/services/matches.service"
-import { newsService } from "@/lib/services/news.service"
+import { getLatestNews } from "@/lib/services/news.service"
+import { transformMatchForClient } from "@/lib/utils/match-helpers"
 
 export const metadata: Metadata = {
   title: "ЖФК ЦСКА - Официальный сайт женского футбольного клуба ЦСКА Москва",
@@ -64,49 +65,19 @@ export const metadata: Metadata = {
 export default async function Home() {
   const [matchesData, newsData] = await Promise.all([
     matchesService.getMatchesForHomepage(),
-    newsService.list(6),
+    getLatestNews(6),
   ])
 
   const lastMatch = matchesData.lastMatch
-    ? {
-        opponentName: matchesData.lastMatch.opponentName,
-        opponentLogoUrl: matchesData.lastMatch.opponentLogoUrl,
-        cskaLogoUrl: matchesData.lastMatch.cskaLogoUrl,
-        matchDate: matchesData.lastMatch.matchDate.toISOString(),
-        venue: matchesData.lastMatch.venue,
-        scoreHome: matchesData.lastMatch.scoreHome,
-        scoreAway: matchesData.lastMatch.scoreAway,
-        isHome: matchesData.lastMatch.isHome,
-        slug: matchesData.lastMatch.slug,
-      }
+    ? transformMatchForClient(matchesData.lastMatch)
     : null
 
   const nextMatch = matchesData.nextMatch
-    ? {
-        opponentName: matchesData.nextMatch.opponentName,
-        opponentLogoUrl: matchesData.nextMatch.opponentLogoUrl,
-        cskaLogoUrl: matchesData.nextMatch.cskaLogoUrl,
-        matchDate: matchesData.nextMatch.matchDate.toISOString(),
-        venue: matchesData.nextMatch.venue,
-        scoreHome: null,
-        scoreAway: null,
-        isHome: matchesData.nextMatch.isHome,
-        slug: matchesData.nextMatch.slug,
-      }
+    ? transformMatchForClient(matchesData.nextMatch)
     : null
 
   const futureMatch = matchesData.futureMatch
-    ? {
-        opponentName: matchesData.futureMatch.opponentName,
-        opponentLogoUrl: matchesData.futureMatch.opponentLogoUrl,
-        cskaLogoUrl: matchesData.futureMatch.cskaLogoUrl,
-        matchDate: matchesData.futureMatch.matchDate.toISOString(),
-        venue: matchesData.futureMatch.venue,
-        scoreHome: null,
-        scoreAway: null,
-        isHome: matchesData.futureMatch.isHome,
-        slug: matchesData.futureMatch.slug,
-      }
+    ? transformMatchForClient(matchesData.futureMatch)
     : null
 
   const news = newsData.map((item) => ({

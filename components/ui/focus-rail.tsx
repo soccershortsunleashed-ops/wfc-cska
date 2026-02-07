@@ -228,11 +228,11 @@ export function FocusRail({
                   opacity: opacity,
                   filter: `blur(${blur}px) brightness(${brightness})`,
                 }}
-                transition={(val) => {
+                transition={((val: string) => {
                   // Use bouncier spring for scale to create the "Tap" effect
                   if (val === "scale") return TAP_SPRING;
                   return BASE_SPRING;
-                }}
+                }) as any}
                 style={{
                   transformStyle: "preserve-3d",
                 }}

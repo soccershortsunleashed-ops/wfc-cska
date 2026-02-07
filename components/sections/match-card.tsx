@@ -52,6 +52,11 @@ export function MatchCard({ lastMatch, nextMatch, futureMatch }: MatchCardProps)
   const hasUpcomingMatches = nextMatch && new Date(nextMatch.matchDate) > new Date()
   const allMatchesArePast = !hasUpcomingMatches
 
+  // Проверяем, является ли матч завершенным (по статусу)
+  const isMatchFinished = (match: Match) => {
+    return match.scoreHome !== null && match.scoreAway !== null
+  }
+
   const renderTeams = (match: Match, showScore: boolean = false) => {
     const homeTeam = match.isHome ? "ЦСКА" : match.opponentName
     const awayTeam = match.isHome ? match.opponentName : "ЦСКА"
@@ -197,7 +202,7 @@ export function MatchCard({ lastMatch, nextMatch, futureMatch }: MatchCardProps)
               </CardHeader>
 
               <CardContent className="pt-3 pb-2 px-3">
-                {renderTeams(nextMatch, allMatchesArePast)}
+                {renderTeams(nextMatch, isMatchFinished(nextMatch))}
 
                 <div className="space-y-1 text-[10px] md:text-xs">
                   {!allMatchesArePast && (
@@ -253,7 +258,7 @@ export function MatchCard({ lastMatch, nextMatch, futureMatch }: MatchCardProps)
               </CardHeader>
 
               <CardContent className="pt-3 pb-2 px-3">
-                {renderTeams(futureMatch, allMatchesArePast)}
+                {renderTeams(futureMatch, isMatchFinished(futureMatch))}
 
                 <div className="space-y-1 text-[10px] md:text-xs">
                   {!allMatchesArePast && (

@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: false,
     remotePatterns: [
       {
         protocol: 'http',
@@ -23,6 +24,10 @@ const nextConfig: NextConfig = {
         pathname: '/upload/**',
       },
     ],
+  },
+  // Increase timeout for external image fetching
+  experimental: {
+    proxyTimeout: 30000, // 30 seconds
   },
 };
 

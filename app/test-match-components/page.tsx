@@ -215,7 +215,7 @@ export default function TestMatchComponentsPage() {
         <TournamentTable
           teams={mockTeams}
           tournamentName="Суперлига"
-          season="2024/2025"
+          season="2025"
           highlightPositions={{
             champions: [1],
             championsLeague: [2, 3],

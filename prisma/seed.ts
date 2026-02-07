@@ -1,4 +1,4 @@
-import { PrismaClient, Position, Team, MatchType } from '@prisma/client'
+import { PrismaClient, Position, PlayerTeam, MatchType } from '@prisma/client'
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
 
 const adapter = new PrismaBetterSqlite3({
@@ -30,7 +30,7 @@ async function main() {
         heightCm: 175,
         weightKg: 65,
         photoUrl: '/images/players/petrova.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -45,7 +45,7 @@ async function main() {
         heightCm: 178,
         weightKg: 68,
         photoUrl: '/images/players/nikolich.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
 
@@ -62,7 +62,7 @@ async function main() {
         heightCm: 170,
         weightKg: 62,
         photoUrl: '/images/players/myasnikova.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -77,7 +77,7 @@ async function main() {
         heightCm: 168,
         weightKg: 60,
         photoUrl: '/images/players/semenova.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -92,7 +92,7 @@ async function main() {
         heightCm: 172,
         weightKg: 63,
         photoUrl: '/images/players/shishkina.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -107,7 +107,7 @@ async function main() {
         heightCm: 169,
         weightKg: 61,
         photoUrl: '/images/players/bratko.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
 
@@ -124,7 +124,7 @@ async function main() {
         heightCm: 165,
         weightKg: 58,
         photoUrl: '/images/players/ananeva.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -139,7 +139,7 @@ async function main() {
         heightCm: 167,
         weightKg: 59,
         photoUrl: '/images/players/achoyan.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -154,7 +154,7 @@ async function main() {
         heightCm: 166,
         weightKg: 57,
         photoUrl: '/images/players/dolmatova.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -169,7 +169,7 @@ async function main() {
         heightCm: 168,
         weightKg: 60,
         photoUrl: '/images/players/chavich.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -184,7 +184,7 @@ async function main() {
         heightCm: 164,
         weightKg: 56,
         photoUrl: '/images/players/kokoeva.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
 
@@ -201,7 +201,7 @@ async function main() {
         heightCm: 170,
         weightKg: 62,
         photoUrl: '/images/players/gomes.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -216,7 +216,7 @@ async function main() {
         heightCm: 173,
         weightKg: 64,
         photoUrl: '/images/players/damyanovich.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -231,7 +231,7 @@ async function main() {
         heightCm: 169,
         weightKg: 61,
         photoUrl: '/images/players/kraynova.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
     prisma.player.create({
@@ -246,7 +246,7 @@ async function main() {
         heightCm: 171,
         weightKg: 63,
         photoUrl: '/images/players/kadyntseva.jpg',
-        team: Team.MAIN,
+        team: PlayerTeam.MAIN,
       },
     }),
   ])
@@ -260,6 +260,7 @@ async function main() {
         slug: 'pobeda-v-chempionate',
         title: 'Уверенная победа в чемпионате',
         excerpt: 'ЖФК ЦСКА одержал уверенную победу над соперником со счетом 3:0',
+        content: '<p>ЖФК ЦСКА одержал уверенную победу над соперником со счетом 3:0</p>',
         coverImageUrl: '/images/news/victory.jpg',
         publishedAt: new Date('2026-01-18'),
       },
@@ -269,6 +270,7 @@ async function main() {
         slug: 'novyj-igrok-v-sostave',
         title: 'Новый игрок в составе команды',
         excerpt: 'ЖФК ЦСКА объявляет о подписании контракта с новым игроком',
+        content: '<p>ЖФК ЦСКА объявляет о подписании контракта с новым игроком</p>',
         coverImageUrl: '/images/news/new-player.jpg',
         publishedAt: new Date('2026-01-15'),
       },
@@ -278,6 +280,7 @@ async function main() {
         slug: 'trenirovochnyj-sbor',
         title: 'Команда начала тренировочный сбор',
         excerpt: 'ЖФК ЦСКА отправился на тренировочный сбор для подготовки к следующему сезону',
+        content: '<p>ЖФК ЦСКА отправился на тренировочный сбор для подготовки к следующему сезону</p>',
         coverImageUrl: '/images/news/training.jpg',
         publishedAt: new Date('2026-01-12'),
       },
@@ -287,6 +290,7 @@ async function main() {
         slug: 'intervyu-s-kapitanom',
         title: 'Интервью с капитаном команды',
         excerpt: 'Капитан ЖФК ЦСКА рассказала о целях команды на текущий сезон',
+        content: '<p>Капитан ЖФК ЦСКА рассказала о целях команды на текущий сезон</p>',
         coverImageUrl: '/images/news/interview.jpg',
         publishedAt: new Date('2026-01-10'),
       },
@@ -296,6 +300,7 @@ async function main() {
         slug: 'blagotvoritelnaya-akciya',
         title: 'Благотворительная акция клуба',
         excerpt: 'ЖФК ЦСКА провел благотворительную акцию для детских домов',
+        content: '<p>ЖФК ЦСКА провел благотворительную акцию для детских домов</p>',
         coverImageUrl: '/images/news/charity.jpg',
         publishedAt: new Date('2026-01-08'),
       },
@@ -305,6 +310,7 @@ async function main() {
         slug: 'podgotovka-k-matchu',
         title: 'Подготовка к важному матчу',
         excerpt: 'Команда усиленно готовится к предстоящему матчу чемпионата',
+        content: '<p>Команда усиленно готовится к предстоящему матчу чемпионата</p>',
         coverImageUrl: '/images/news/preparation.jpg',
         publishedAt: new Date('2026-01-05'),
       },
@@ -317,6 +323,7 @@ async function main() {
   const matches = await Promise.all([
     prisma.match.create({
       data: {
+        slug: 'spartak-2026-01-25',
         type: MatchType.UPCOMING,
         opponentName: 'Спартак',
         opponentLogoUrl: '/images/teams/spartak.png',
@@ -326,6 +333,7 @@ async function main() {
     }),
     prisma.match.create({
       data: {
+        slug: 'lokomotiv-2026-01-18',
         type: MatchType.LAST,
         opponentName: 'Локомотив',
         opponentLogoUrl: '/images/teams/lokomotiv.png',

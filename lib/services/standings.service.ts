@@ -11,12 +11,15 @@ export const standingsService = {
    * Получить турнирную таблицу
    */
   async getStandings(filters: StandingsFilters = {}) {
-    const { tournament = 'Суперлига', season = '2025/2026' } = filters
+    const { tournament = 'Суперлига', season = '2026' } = filters
 
     const standings = await prisma.standingsTeam.findMany({
       where: {
         tournament,
         season,
+      },
+      include: {
+        team: true, // Включаем данные команды
       },
       orderBy: [
         { position: 'asc' },
@@ -32,14 +35,15 @@ export const standingsService = {
   /**
    * Получить позицию команды
    */
-  async getTeamPosition(teamName: string, tournament: string, season: string) {
-    return prisma.standingsTeam.findUnique({
+  async getTeamPosition(teamId: string, tournament: string, season: string) {
+    return prisma.standingsTeam.findFirst({
       where: {
-        teamName_tournament_season: {
-          teamName,
-          tournament,
-          season,
-        },
+        teamId,
+        tournament,
+        season,
+      },
+      include: {
+        team: true,
       },
     })
   },
@@ -48,7 +52,7 @@ export const standingsService = {
    * Обновить турнирную таблицу на основе результатов матчей
    */
   async updateStandingsFromMatches(tournament: string, season: string) {
-    // Получаем все завершенные матчи турнира
+    // Получаем все завершенные матчи турнира с данными команд
     const matches = await prisma.match.findMany({
       where: {
         tournament,
@@ -56,24 +60,31 @@ export const standingsService = {
         status: 'FINISHED',
         scoreHome: { not: null },
         scoreAway: { not: null },
+        homeTeamId: { not: null },
+        awayTeamId: { not: null },
+      },
+      include: {
+        homeTeam: true,
+        awayTeam: true,
       },
       orderBy: { matchDate: 'asc' },
     })
 
-    // Собираем статистику по командам
+    // Собираем статистику по командам (используем teamId как ключ)
     const teamsStats = new Map<string, any>()
 
     matches.forEach((match) => {
-      const homeTeam = match.isHome ? 'ЦСКА' : match.opponentName
-      const awayTeam = match.isHome ? match.opponentName : 'ЦСКА'
+      if (!match.homeTeam || !match.awayTeam) return
+
+      const homeTeamId = match.homeTeam.id
+      const awayTeamId = match.awayTeam.id
       const homeScore = match.scoreHome!
       const awayScore = match.scoreAway!
 
       // Инициализируем статистику для команд
-      if (!teamsStats.has(homeTeam)) {
-        teamsStats.set(homeTeam, {
-          teamName: homeTeam,
-          teamLogoUrl: match.isHome ? match.cskaLogoUrl : match.opponentLogoUrl,
+      if (!teamsStats.has(homeTeamId)) {
+        teamsStats.set(homeTeamId, {
+          teamId: homeTeamId,
           played: 0,
           won: 0,
           drawn: 0,
@@ -84,10 +95,9 @@ export const standingsService = {
           form: [],
         })
       }
-      if (!teamsStats.has(awayTeam)) {
-        teamsStats.set(awayTeam, {
-          teamName: awayTeam,
-          teamLogoUrl: match.isHome ? match.opponentLogoUrl : match.cskaLogoUrl,
+      if (!teamsStats.has(awayTeamId)) {
+        teamsStats.set(awayTeamId, {
+          teamId: awayTeamId,
           played: 0,
           won: 0,
           drawn: 0,
@@ -99,8 +109,8 @@ export const standingsService = {
         })
       }
 
-      const homeStats = teamsStats.get(homeTeam)!
-      const awayStats = teamsStats.get(awayTeam)!
+      const homeStats = teamsStats.get(homeTeamId)!
+      const awayStats = teamsStats.get(awayTeamId)!
 
       // Обновляем статистику
       homeStats.played++
@@ -150,8 +160,7 @@ export const standingsService = {
     const createPromises = sortedTeams.map((team, index) => {
       return prisma.standingsTeam.create({
         data: {
-          teamName: team.teamName,
-          teamLogoUrl: team.teamLogoUrl,
+          teamId: team.teamId,
           tournament,
           season,
           position: index + 1,

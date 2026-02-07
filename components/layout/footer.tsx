@@ -10,6 +10,7 @@ const navigationLinks = [
       { label: "Основной состав", href: "/players" },
       { label: "Молодежная команда", href: "/players?team=youth" },
       { label: "Юниорская команда", href: "/players?team=junior" },
+      { label: "Тренерский штаб", href: "/team/coaching-staff" },
     ],
   },
   {

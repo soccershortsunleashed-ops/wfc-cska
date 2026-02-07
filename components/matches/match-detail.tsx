@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Match, MatchStatus } from "@prisma/client"
+import { Match, MatchStatus, FootballTeam } from "@prisma/client"
 import { Calendar, MapPin, Trophy, Users, User, ArrowLeft, Video } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -11,19 +11,45 @@ import { Separator } from "@/components/ui/separator"
 import { getImageProps } from "@/lib/image-utils"
 import { cn } from "@/lib/utils"
 
+type MatchWithTeams = Match & {
+  homeTeam?: FootballTeam | null
+  awayTeam?: FootballTeam | null
+  // Старые поля для обратной совместимости
+  opponentName?: string | null
+  opponentLogoUrl?: string | null
+  cskaLogoUrl?: string | null
+  isHome?: boolean | null
+}
+
 interface MatchDetailProps {
-  match: Match
+  match: MatchWithTeams
 }
 
 export function MatchDetail({ match }: MatchDetailProps) {
-  const formatDate = (date: Date) => {
+  // Определяем команды (новая структура или старая для обратной совместимости)
+  const isCskaHome = match.homeTeam?.name === 'ЦСКА' || match.isHome === true
+  const cskaTeam = isCskaHome ? match.homeTeam : match.awayTeam
+  const opponentTeam = isCskaHome ? match.awayTeam : match.homeTeam
+  
+  // Формируем данные для отображения
+  const cskaName = 'ЦСКА'
+  const opponentName = opponentTeam?.name || match.opponentName || 'Соперник'
+  const cskaLogoUrl = cskaTeam?.logoFileName 
+    ? `/teams/${cskaTeam.season}/${cskaTeam.competition}/${cskaTeam.logoFileName}`
+    : match.cskaLogoUrl || null
+  const opponentLogoUrl = opponentTeam?.logoFileName
+    ? `/teams/${opponentTeam.season}/${opponentTeam.competition}/${opponentTeam.logoFileName}`
+    : match.opponentLogoUrl || null
+
+  const formatDate = (date: Date | string) => {
+    const dateObj = typeof date === 'string' ? new Date(date) : date
     return new Intl.DateTimeFormat("ru-RU", {
       day: "numeric",
       month: "long",
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-    }).format(date)
+    }).format(dateObj)
   }
 
   const getStatusBadge = (status: MatchStatus) => {
@@ -61,11 +87,15 @@ export function MatchDetail({ match }: MatchDetailProps) {
     }
   }
 
-  const matchDate = new Date(match.matchDate)
+  const matchDate = typeof match.matchDate === 'string' ? new Date(match.matchDate) : match.matchDate
   const isFinished = match.status === MatchStatus.FINISHED
   const hasScore = match.scoreHome !== null && match.scoreAway !== null
-  const cskaWon = hasScore && match.scoreHome! > match.scoreAway!
-  const isDraw = hasScore && match.scoreHome === match.scoreAway
+  
+  // Определяем результат для ЦСКА
+  const cskaScore = isCskaHome ? match.scoreHome : match.scoreAway
+  const opponentScore = isCskaHome ? match.scoreAway : match.scoreHome
+  const cskaWon = hasScore && cskaScore! > opponentScore!
+  const isDraw = hasScore && cskaScore === opponentScore
 
   return (
     <div className="space-y-6">
@@ -102,14 +132,14 @@ export function MatchDetail({ match }: MatchDetailProps) {
           {/* Teams and Score */}
           <div className="flex items-center justify-between gap-8 mb-8">
             {/* Home Team (left) */}
-            {match.isHome ? (
+            {isCskaHome ? (
               // ЦСКА дома - слева
               <div className="flex flex-col items-center flex-1">
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
-                  {match.cskaLogoUrl ? (
+                  {cskaLogoUrl ? (
                     <div className="relative w-full h-full">
                       <Image
-                        {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
+                        {...getImageProps(cskaLogoUrl, cskaName)}
                         fill
                         sizes="128px"
                         className="object-contain"
@@ -122,7 +152,7 @@ export function MatchDetail({ match }: MatchDetailProps) {
                   )}
                 </div>
                 <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
-                  ЦСКА
+                  {cskaName}
                 </h2>
                 <Badge variant="outline" className="text-xs">
                   Дома
@@ -140,10 +170,10 @@ export function MatchDetail({ match }: MatchDetailProps) {
               // Соперник дома - слева
               <div className="flex flex-col items-center flex-1">
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
-                  {match.opponentLogoUrl ? (
+                  {opponentLogoUrl ? (
                     <div className="relative w-full h-full">
                       <Image
-                        {...getImageProps(match.opponentLogoUrl, match.opponentName)}
+                        {...getImageProps(opponentLogoUrl, opponentName)}
                         fill
                         sizes="128px"
                         className="object-contain"
@@ -151,12 +181,12 @@ export function MatchDetail({ match }: MatchDetailProps) {
                     </div>
                   ) : (
                     <span className="text-3xl font-bold text-muted-foreground">
-                      {match.opponentName.substring(0, 2)}
+                      {opponentName.substring(0, 2)}
                     </span>
                   )}
                 </div>
                 <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
-                  {match.opponentName}
+                  {opponentName}
                 </h2>
                 <Badge variant="outline" className="text-xs">
                   Дома
@@ -186,14 +216,14 @@ export function MatchDetail({ match }: MatchDetailProps) {
             </div>
 
             {/* Away Team (right) */}
-            {match.isHome ? (
+            {isCskaHome ? (
               // Соперник в гостях - справа
               <div className="flex flex-col items-center flex-1">
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
-                  {match.opponentLogoUrl ? (
+                  {opponentLogoUrl ? (
                     <div className="relative w-full h-full">
                       <Image
-                        {...getImageProps(match.opponentLogoUrl, match.opponentName)}
+                        {...getImageProps(opponentLogoUrl, opponentName)}
                         fill
                         sizes="128px"
                         className="object-contain"
@@ -201,12 +231,12 @@ export function MatchDetail({ match }: MatchDetailProps) {
                     </div>
                   ) : (
                     <span className="text-3xl font-bold text-muted-foreground">
-                      {match.opponentName.substring(0, 2)}
+                      {opponentName.substring(0, 2)}
                     </span>
                   )}
                 </div>
                 <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
-                  {match.opponentName}
+                  {opponentName}
                 </h2>
                 <Badge variant="outline" className="text-xs">
                   В гостях
@@ -224,10 +254,10 @@ export function MatchDetail({ match }: MatchDetailProps) {
               // ЦСКА в гостях - справа
               <div className="flex flex-col items-center flex-1">
                 <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-muted flex items-center justify-center mb-4 overflow-hidden p-4">
-                  {match.cskaLogoUrl ? (
+                  {cskaLogoUrl ? (
                     <div className="relative w-full h-full">
                       <Image
-                        {...getImageProps(match.cskaLogoUrl, "ЦСКА")}
+                        {...getImageProps(cskaLogoUrl, cskaName)}
                         fill
                         sizes="128px"
                         className="object-contain"
@@ -240,7 +270,7 @@ export function MatchDetail({ match }: MatchDetailProps) {
                   )}
                 </div>
                 <h2 className="text-xl md:text-2xl font-bold text-center mb-2">
-                  ЦСКА
+                  {cskaName}
                 </h2>
                 <Badge variant="outline" className="text-xs">
                   В гостях

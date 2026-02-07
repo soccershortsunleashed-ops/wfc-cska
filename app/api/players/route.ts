@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { playersService } from '@/lib/services/players.service'
 import { PlayersQuerySchema } from '@/lib/schemas/player.schema'
-import { Position, Team } from '@prisma/client'
+import { Position, PlayerTeam } from '@prisma/client'
 
 export async function GET(request: NextRequest) {
   try {

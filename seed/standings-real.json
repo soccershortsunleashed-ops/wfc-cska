@@ -1,0 +1,1245 @@
+[
+  {
+    "seasonId": "200088",
+    "seasonName": "2026",
+    "teams": [
+      {
+        "played": 0,
+        "position": 1,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 0,
+        "position": 2,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "Ð¡Ð¿Ð°ÑÑÐ°Ðº"
+      },
+      {
+        "played": 0,
+        "position": 3,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "ÐÐµÐ½Ð¸Ñ"
+      },
+      {
+        "played": 0,
+        "position": 4,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "ÐÐ¾ÐºÐ¾Ð¼Ð¾ÑÐ¸Ð²"
+      },
+      {
+        "played": 0,
+        "position": 5,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "ÐÑÐ°ÑÐ½Ð¾Ð´Ð°Ñ"
+      },
+      {
+        "played": 0,
+        "position": 6,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "ÐÑÑÐ»ÑÑ Ð¡Ð¾Ð²ÐµÑÐ¾Ð²"
+      },
+      {
+        "played": 0,
+        "position": 7,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "ÐÐ¸Ð½Ð°Ð¼Ð¾"
+      },
+      {
+        "played": 0,
+        "position": 8,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      },
+      {
+        "played": 0,
+        "position": 9,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      },
+      {
+        "played": 0,
+        "position": 10,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "Ð ÑÐ±Ð¸Ð½"
+      },
+      {
+        "played": 0,
+        "position": 11,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 0,
+        "position": 12,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "Ð Ð¾ÑÑÐ¾Ð²"
+      },
+      {
+        "played": 0,
+        "position": 13,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 0,
+        "goalsAgainst": 0,
+        "drawn": 0,
+        "lost": 0,
+        "teamName": "ÐÐ½Ð¸ÑÐµÐ¹"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "196849",
+    "seasonName": "2025",
+    "teams": [
+      {
+        "played": 24,
+        "position": 1,
+        "points": 64,
+        "won": 20,
+        "goalsFor": 68,
+        "goalsAgainst": 12,
+        "drawn": 4,
+        "lost": 0,
+        "teamName": "Ð¡Ð¿Ð°ÑÑÐ°Ðº"
+      },
+      {
+        "played": 24,
+        "position": 2,
+        "points": 60,
+        "won": 19,
+        "goalsFor": 58,
+        "goalsAgainst": 10,
+        "drawn": 3,
+        "lost": 2,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 24,
+        "position": 3,
+        "points": 52,
+        "won": 16,
+        "goalsFor": 49,
+        "goalsAgainst": 13,
+        "drawn": 4,
+        "lost": 4,
+        "teamName": "ÐÐµÐ½Ð¸Ñ"
+      },
+      {
+        "played": 24,
+        "position": 4,
+        "points": 44,
+        "won": 14,
+        "goalsFor": 43,
+        "goalsAgainst": 21,
+        "drawn": 2,
+        "lost": 8,
+        "teamName": "ÐÐ¾ÐºÐ¾Ð¼Ð¾ÑÐ¸Ð²"
+      },
+      {
+        "played": 24,
+        "position": 5,
+        "points": 39,
+        "won": 12,
+        "goalsFor": 26,
+        "goalsAgainst": 23,
+        "drawn": 3,
+        "lost": 9,
+        "teamName": "ÐÑÐ°ÑÐ½Ð¾Ð´Ð°Ñ"
+      },
+      {
+        "played": 24,
+        "position": 6,
+        "points": 38,
+        "won": 11,
+        "goalsFor": 21,
+        "goalsAgainst": 21,
+        "drawn": 5,
+        "lost": 8,
+        "teamName": "ÐÑÑÐ»ÑÑ Ð¡Ð¾Ð²ÐµÑÐ¾Ð²"
+      },
+      {
+        "played": 24,
+        "position": 7,
+        "points": 37,
+        "won": 11,
+        "goalsFor": 35,
+        "goalsAgainst": 31,
+        "drawn": 4,
+        "lost": 9,
+        "teamName": "ÐÐ¸Ð½Ð°Ð¼Ð¾"
+      },
+      {
+        "played": 24,
+        "position": 8,
+        "points": 31,
+        "won": 9,
+        "goalsFor": 28,
+        "goalsAgainst": 35,
+        "drawn": 4,
+        "lost": 11,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      },
+      {
+        "played": 24,
+        "position": 9,
+        "points": 25,
+        "won": 7,
+        "goalsFor": 26,
+        "goalsAgainst": 39,
+        "drawn": 4,
+        "lost": 13,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      },
+      {
+        "played": 24,
+        "position": 10,
+        "points": 17,
+        "won": 4,
+        "goalsFor": 18,
+        "goalsAgainst": 50,
+        "drawn": 5,
+        "lost": 15,
+        "teamName": "Ð ÑÐ±Ð¸Ð½"
+      },
+      {
+        "played": 24,
+        "position": 11,
+        "points": 17,
+        "won": 4,
+        "goalsFor": 14,
+        "goalsAgainst": 37,
+        "drawn": 5,
+        "lost": 15,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 24,
+        "position": 12,
+        "points": 14,
+        "won": 3,
+        "goalsFor": 11,
+        "goalsAgainst": 44,
+        "drawn": 5,
+        "lost": 16,
+        "teamName": "Ð Ð¾ÑÑÐ¾Ð²"
+      },
+      {
+        "played": 24,
+        "position": 13,
+        "points": 5,
+        "won": 1,
+        "goalsFor": 9,
+        "goalsAgainst": 70,
+        "drawn": 2,
+        "lost": 21,
+        "teamName": "ÐÐ½Ð¸ÑÐµÐ¹"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "191750",
+    "seasonName": "2024",
+    "teams": [
+      {
+        "played": 24,
+        "position": 1,
+        "points": 68,
+        "won": 22,
+        "goalsFor": 65,
+        "goalsAgainst": 8,
+        "drawn": 2,
+        "lost": 0,
+        "teamName": "ÐÐµÐ½Ð¸Ñ"
+      },
+      {
+        "played": 24,
+        "position": 2,
+        "points": 62,
+        "won": 20,
+        "goalsFor": 51,
+        "goalsAgainst": 6,
+        "drawn": 2,
+        "lost": 2,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 24,
+        "position": 3,
+        "points": 50,
+        "won": 15,
+        "goalsFor": 50,
+        "goalsAgainst": 18,
+        "drawn": 5,
+        "lost": 4,
+        "teamName": "Ð¡Ð¿Ð°ÑÑÐ°Ðº"
+      },
+      {
+        "played": 24,
+        "position": 4,
+        "points": 50,
+        "won": 15,
+        "goalsFor": 41,
+        "goalsAgainst": 15,
+        "drawn": 5,
+        "lost": 4,
+        "teamName": "ÐÐ¾ÐºÐ¾Ð¼Ð¾ÑÐ¸Ð²"
+      },
+      {
+        "played": 24,
+        "position": 5,
+        "points": 41,
+        "won": 13,
+        "goalsFor": 36,
+        "goalsAgainst": 30,
+        "drawn": 2,
+        "lost": 9,
+        "teamName": "ÐÐ¸Ð½Ð°Ð¼Ð¾"
+      },
+      {
+        "played": 24,
+        "position": 6,
+        "points": 33,
+        "won": 9,
+        "goalsFor": 24,
+        "goalsAgainst": 27,
+        "drawn": 6,
+        "lost": 9,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 24,
+        "position": 7,
+        "points": 28,
+        "won": 8,
+        "goalsFor": 23,
+        "goalsAgainst": 34,
+        "drawn": 4,
+        "lost": 12,
+        "teamName": "ÐÑÐ°ÑÐ½Ð¾Ð´Ð°Ñ"
+      },
+      {
+        "played": 24,
+        "position": 8,
+        "points": 23,
+        "won": 7,
+        "goalsFor": 21,
+        "goalsAgainst": 36,
+        "drawn": 2,
+        "lost": 15,
+        "teamName": "Ð Ð¾ÑÑÐ¾Ð²"
+      },
+      {
+        "played": 24,
+        "position": 9,
+        "points": 22,
+        "won": 6,
+        "goalsFor": 22,
+        "goalsAgainst": 35,
+        "drawn": 4,
+        "lost": 14,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      },
+      {
+        "played": 24,
+        "position": 10,
+        "points": 21,
+        "won": 6,
+        "goalsFor": 16,
+        "goalsAgainst": 44,
+        "drawn": 3,
+        "lost": 15,
+        "teamName": "ÐÐ½Ð¸ÑÐµÐ¹"
+      },
+      {
+        "played": 24,
+        "position": 11,
+        "points": 20,
+        "won": 6,
+        "goalsFor": 24,
+        "goalsAgainst": 47,
+        "drawn": 2,
+        "lost": 16,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      },
+      {
+        "played": 24,
+        "position": 12,
+        "points": 17,
+        "won": 3,
+        "goalsFor": 13,
+        "goalsAgainst": 39,
+        "drawn": 9,
+        "lost": 12,
+        "teamName": "ÐÑÑÐ»ÑÑ Ð¡Ð¾Ð²ÐµÑÐ¾Ð²"
+      },
+      {
+        "played": 24,
+        "position": 13,
+        "points": 8,
+        "won": 2,
+        "goalsFor": 18,
+        "goalsAgainst": 65,
+        "drawn": 2,
+        "lost": 20,
+        "teamName": "Ð ÑÐ±Ð¸Ð½"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "184183",
+    "seasonName": "2023",
+    "teams": [
+      {
+        "played": 27,
+        "position": 1,
+        "points": 41,
+        "won": 22,
+        "goalsFor": 65,
+        "goalsAgainst": 10,
+        "drawn": 4,
+        "lost": 1,
+        "teamName": "ÐÐµÐ½Ð¸Ñ"
+      },
+      {
+        "played": 27,
+        "position": 2,
+        "points": 38,
+        "won": 23,
+        "goalsFor": 85,
+        "goalsAgainst": 16,
+        "drawn": 1,
+        "lost": 3,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 27,
+        "position": 3,
+        "points": 37,
+        "won": 20,
+        "goalsFor": 66,
+        "goalsAgainst": 16,
+        "drawn": 2,
+        "lost": 5,
+        "teamName": "ÐÐ¾ÐºÐ¾Ð¼Ð¾ÑÐ¸Ð²"
+      },
+      {
+        "played": 27,
+        "position": 4,
+        "points": 27,
+        "won": 13,
+        "goalsFor": 35,
+        "goalsAgainst": 26,
+        "drawn": 7,
+        "lost": 7,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 27,
+        "position": 5,
+        "points": 23,
+        "won": 14,
+        "goalsFor": 43,
+        "goalsAgainst": 38,
+        "drawn": 2,
+        "lost": 11,
+        "teamName": "ÐÐ¸Ð½Ð°Ð¼Ð¾"
+      },
+      {
+        "played": 27,
+        "position": 6,
+        "points": 14,
+        "won": 9,
+        "goalsFor": 22,
+        "goalsAgainst": 57,
+        "drawn": 2,
+        "lost": 16,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "175801",
+    "seasonName": "2022",
+    "teams": [
+      {
+        "played": 18,
+        "position": 1,
+        "points": 46,
+        "won": 14,
+        "goalsFor": 41,
+        "goalsAgainst": 4,
+        "drawn": 4,
+        "lost": 0,
+        "teamName": "ÐÐµÐ½Ð¸Ñ"
+      },
+      {
+        "played": 18,
+        "position": 2,
+        "points": 43,
+        "won": 13,
+        "goalsFor": 43,
+        "goalsAgainst": 10,
+        "drawn": 4,
+        "lost": 1,
+        "teamName": "ÐÐ¾ÐºÐ¾Ð¼Ð¾ÑÐ¸Ð²"
+      },
+      {
+        "played": 18,
+        "position": 3,
+        "points": 40,
+        "won": 13,
+        "goalsFor": 34,
+        "goalsAgainst": 12,
+        "drawn": 1,
+        "lost": 4,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 18,
+        "position": 4,
+        "points": 25,
+        "won": 7,
+        "goalsFor": 18,
+        "goalsAgainst": 19,
+        "drawn": 4,
+        "lost": 7,
+        "teamName": "Ð Ð¾ÑÑÐ¾Ð²"
+      },
+      {
+        "played": 18,
+        "position": 5,
+        "points": 20,
+        "won": 6,
+        "goalsFor": 18,
+        "goalsAgainst": 35,
+        "drawn": 2,
+        "lost": 10,
+        "teamName": "ÐÑÐ°ÑÐ½Ð¾Ð´Ð°Ñ"
+      },
+      {
+        "played": 18,
+        "position": 6,
+        "points": 18,
+        "won": 5,
+        "goalsFor": 15,
+        "goalsAgainst": 32,
+        "drawn": 3,
+        "lost": 10,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      },
+      {
+        "played": 18,
+        "position": 7,
+        "points": 18,
+        "won": 4,
+        "goalsFor": 12,
+        "goalsAgainst": 28,
+        "drawn": 6,
+        "lost": 8,
+        "teamName": "Ð ÑÐ±Ð¸Ð½"
+      },
+      {
+        "played": 18,
+        "position": 8,
+        "points": 17,
+        "won": 4,
+        "goalsFor": 21,
+        "goalsAgainst": 27,
+        "drawn": 5,
+        "lost": 9,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 18,
+        "position": 9,
+        "points": 16,
+        "won": 4,
+        "goalsFor": 16,
+        "goalsAgainst": 23,
+        "drawn": 4,
+        "lost": 10,
+        "teamName": "ÐÐ½Ð¸ÑÐµÐ¹"
+      },
+      {
+        "played": 18,
+        "position": 10,
+        "points": 8,
+        "won": 1,
+        "goalsFor": 10,
+        "goalsAgainst": 38,
+        "drawn": 5,
+        "lost": 12,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "170504",
+    "seasonName": "2021",
+    "teams": [
+      {
+        "played": 11,
+        "position": 1,
+        "points": 28,
+        "won": 9,
+        "goalsFor": 53,
+        "goalsAgainst": 7,
+        "drawn": 1,
+        "lost": 1,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 11,
+        "position": 2,
+        "points": 28,
+        "won": 9,
+        "goalsFor": 100,
+        "goalsAgainst": 4,
+        "drawn": 1,
+        "lost": 1,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      },
+      {
+        "played": 11,
+        "position": 3,
+        "points": 25,
+        "won": 7,
+        "goalsFor": 29,
+        "goalsAgainst": 11,
+        "drawn": 4,
+        "lost": 0,
+        "teamName": "ÐÐ¾ÐºÐ¾Ð¼Ð¾ÑÐ¸Ð²"
+      },
+      {
+        "played": 11,
+        "position": 4,
+        "points": 23,
+        "won": 7,
+        "goalsFor": 33,
+        "goalsAgainst": 15,
+        "drawn": 2,
+        "lost": 2,
+        "teamName": "ÐÑÐ°ÑÐ½Ð¾Ð´Ð°Ñ"
+      },
+      {
+        "played": 11,
+        "position": 5,
+        "points": 17,
+        "won": 5,
+        "goalsFor": 16,
+        "goalsAgainst": 17,
+        "drawn": 2,
+        "lost": 4,
+        "teamName": "ÐÐµÐ½Ð¸Ñ"
+      },
+      {
+        "played": 11,
+        "position": 6,
+        "points": 16,
+        "won": 5,
+        "goalsFor": 28,
+        "goalsAgainst": 22,
+        "drawn": 1,
+        "lost": 5,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 11,
+        "position": 7,
+        "points": 16,
+        "won": 4,
+        "goalsFor": 25,
+        "goalsAgainst": 18,
+        "drawn": 4,
+        "lost": 3,
+        "teamName": "ÐÑÑÐ»ÑÑ Ð¡Ð¾Ð²ÐµÑÐ¾Ð²"
+      },
+      {
+        "played": 11,
+        "position": 8,
+        "points": 8,
+        "won": 2,
+        "goalsFor": 8,
+        "goalsAgainst": 43,
+        "drawn": 2,
+        "lost": 7,
+        "teamName": "Ð¡ÑÑÐ¾Ð³Ð¸Ð½Ð¾"
+      },
+      {
+        "played": 11,
+        "position": 9,
+        "points": 8,
+        "won": 2,
+        "goalsFor": 4,
+        "goalsAgainst": 49,
+        "drawn": 2,
+        "lost": 7,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      },
+      {
+        "played": 11,
+        "position": 10,
+        "points": 7,
+        "won": 1,
+        "goalsFor": 6,
+        "goalsAgainst": 32,
+        "drawn": 4,
+        "lost": 6,
+        "teamName": "ÐÐ¸ÑÐ°Ñ"
+      },
+      {
+        "played": 11,
+        "position": 11,
+        "points": 6,
+        "won": 1,
+        "goalsFor": 8,
+        "goalsAgainst": 40,
+        "drawn": 3,
+        "lost": 7,
+        "teamName": "Ð Ð¾ÑÑÐ¾Ð²"
+      },
+      {
+        "played": 11,
+        "position": 12,
+        "points": 3,
+        "won": 1,
+        "goalsFor": 4,
+        "goalsAgainst": 56,
+        "drawn": 0,
+        "lost": 10,
+        "teamName": "ÐÐ½Ð¸ÑÐµÐ¹"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "167900",
+    "seasonName": "2020",
+    "teams": [
+      {
+        "played": 14,
+        "position": 1,
+        "points": 33,
+        "won": 10,
+        "goalsFor": 20,
+        "goalsAgainst": 9,
+        "drawn": 3,
+        "lost": 1,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 14,
+        "position": 2,
+        "points": 32,
+        "won": 9,
+        "goalsFor": 26,
+        "goalsAgainst": 6,
+        "drawn": 5,
+        "lost": 0,
+        "teamName": "ÐÐ¾ÐºÐ¾Ð¼Ð¾ÑÐ¸Ð²"
+      },
+      {
+        "played": 14,
+        "position": 3,
+        "points": 21,
+        "won": 5,
+        "goalsFor": 15,
+        "goalsAgainst": 7,
+        "drawn": 6,
+        "lost": 3,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 14,
+        "position": 4,
+        "points": 19,
+        "won": 5,
+        "goalsFor": 12,
+        "goalsAgainst": 11,
+        "drawn": 4,
+        "lost": 5,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      },
+      {
+        "played": 14,
+        "position": 5,
+        "points": 15,
+        "won": 4,
+        "goalsFor": 14,
+        "goalsAgainst": 14,
+        "drawn": 3,
+        "lost": 7,
+        "teamName": "ÐÐµÐ½Ð¸Ñ"
+      },
+      {
+        "played": 14,
+        "position": 6,
+        "points": 14,
+        "won": 3,
+        "goalsFor": 14,
+        "goalsAgainst": 19,
+        "drawn": 5,
+        "lost": 6,
+        "teamName": "ÐÑÐ°ÑÐ½Ð¾Ð´Ð°Ñ"
+      },
+      {
+        "played": 14,
+        "position": 7,
+        "points": 11,
+        "won": 2,
+        "goalsFor": 5,
+        "goalsAgainst": 15,
+        "drawn": 5,
+        "lost": 7,
+        "teamName": "ÐÐ½Ð¸ÑÐµÐ¹"
+      },
+      {
+        "played": 14,
+        "position": 8,
+        "points": 7,
+        "won": 2,
+        "goalsFor": 8,
+        "goalsAgainst": 33,
+        "drawn": 1,
+        "lost": 11,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "170436",
+    "seasonName": "2019",
+    "teams": [
+      {
+        "played": 21,
+        "position": 1,
+        "points": 56,
+        "won": 18,
+        "goalsFor": 52,
+        "goalsAgainst": 8,
+        "drawn": 2,
+        "lost": 1,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 21,
+        "position": 2,
+        "points": 44,
+        "won": 14,
+        "goalsFor": 50,
+        "goalsAgainst": 12,
+        "drawn": 2,
+        "lost": 5,
+        "teamName": "ÐÐ¾ÐºÐ¾Ð¼Ð¾ÑÐ¸Ð²"
+      },
+      {
+        "played": 21,
+        "position": 3,
+        "points": 35,
+        "won": 10,
+        "goalsFor": 22,
+        "goalsAgainst": 22,
+        "drawn": 5,
+        "lost": 6,
+        "teamName": "ÐÑÐ±Ð°Ð½Ð¾ÑÐºÐ°"
+      },
+      {
+        "played": 21,
+        "position": 4,
+        "points": 31,
+        "won": 9,
+        "goalsFor": 31,
+        "goalsAgainst": 20,
+        "drawn": 4,
+        "lost": 8,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 21,
+        "position": 5,
+        "points": 31,
+        "won": 8,
+        "goalsFor": 25,
+        "goalsAgainst": 20,
+        "drawn": 7,
+        "lost": 6,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      },
+      {
+        "played": 21,
+        "position": 6,
+        "points": 20,
+        "won": 5,
+        "goalsFor": 25,
+        "goalsAgainst": 37,
+        "drawn": 5,
+        "lost": 11,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      },
+      {
+        "played": 21,
+        "position": 7,
+        "points": 12,
+        "won": 3,
+        "goalsFor": 16,
+        "goalsAgainst": 44,
+        "drawn": 3,
+        "lost": 15,
+        "teamName": "ÐÐ½Ð¸ÑÐµÐ¹"
+      },
+      {
+        "played": 21,
+        "position": 8,
+        "points": 7,
+        "won": 1,
+        "goalsFor": 8,
+        "goalsAgainst": 66,
+        "drawn": 4,
+        "lost": 16,
+        "teamName": "Ð¢Ð¾ÑÐ¿ÐµÐ´Ð¾ ÐÐ¶ÐµÐ²ÑÐº"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "170437",
+    "seasonName": "2018",
+    "teams": [
+      {
+        "played": 14,
+        "position": 1,
+        "points": 33,
+        "won": 10,
+        "goalsFor": 21,
+        "goalsAgainst": 3,
+        "drawn": 3,
+        "lost": 1,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      },
+      {
+        "played": 14,
+        "position": 2,
+        "points": 26,
+        "won": 8,
+        "goalsFor": 22,
+        "goalsAgainst": 20,
+        "drawn": 2,
+        "lost": 4,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      },
+      {
+        "played": 14,
+        "position": 3,
+        "points": 25,
+        "won": 8,
+        "goalsFor": 21,
+        "goalsAgainst": 14,
+        "drawn": 1,
+        "lost": 5,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 14,
+        "position": 4,
+        "points": 25,
+        "won": 7,
+        "goalsFor": 20,
+        "goalsAgainst": 10,
+        "drawn": 4,
+        "lost": 3,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 14,
+        "position": 5,
+        "points": 20,
+        "won": 6,
+        "goalsFor": 17,
+        "goalsAgainst": 4,
+        "drawn": 2,
+        "lost": 6,
+        "teamName": "ÐÑÐ±Ð°Ð½Ð¾ÑÐºÐ°"
+      },
+      {
+        "played": 14,
+        "position": 6,
+        "points": 20,
+        "won": 5,
+        "goalsFor": 22,
+        "goalsAgainst": 8,
+        "drawn": 5,
+        "lost": 4,
+        "teamName": "ÐÐ¾ÐºÐ¾Ð¼Ð¾ÑÐ¸Ð²"
+      },
+      {
+        "played": 14,
+        "position": 7,
+        "points": 9,
+        "won": 2,
+        "goalsFor": 9,
+        "goalsAgainst": 21,
+        "drawn": 3,
+        "lost": 9,
+        "teamName": "ÐÐ½Ð¸ÑÐµÐ¹"
+      },
+      {
+        "played": 14,
+        "position": 8,
+        "points": 0,
+        "won": 0,
+        "goalsFor": 1,
+        "goalsAgainst": 43,
+        "drawn": 0,
+        "lost": 14,
+        "teamName": "Ð¢Ð¾ÑÐ¿ÐµÐ´Ð¾ ÐÐ¶ÐµÐ²ÑÐº"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "170438",
+    "seasonName": "2017",
+    "teams": [
+      {
+        "played": 14,
+        "position": 1,
+        "points": 35,
+        "won": 11,
+        "goalsFor": 32,
+        "goalsAgainst": 7,
+        "drawn": 2,
+        "lost": 1,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 14,
+        "position": 2,
+        "points": 31,
+        "won": 9,
+        "goalsFor": 29,
+        "goalsAgainst": 11,
+        "drawn": 4,
+        "lost": 1,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      },
+      {
+        "played": 14,
+        "position": 3,
+        "points": 29,
+        "won": 9,
+        "goalsFor": 20,
+        "goalsAgainst": 12,
+        "drawn": 2,
+        "lost": 3,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      },
+      {
+        "played": 14,
+        "position": 4,
+        "points": 28,
+        "won": 9,
+        "goalsFor": 24,
+        "goalsAgainst": 15,
+        "drawn": 1,
+        "lost": 4,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 14,
+        "position": 5,
+        "points": 13,
+        "won": 3,
+        "goalsFor": 13,
+        "goalsAgainst": 19,
+        "drawn": 4,
+        "lost": 7,
+        "teamName": "ÐÑÐ±Ð°Ð½Ð¾ÑÐºÐ°"
+      },
+      {
+        "played": 14,
+        "position": 6,
+        "points": 9,
+        "won": 2,
+        "goalsFor": 11,
+        "goalsAgainst": 28,
+        "drawn": 3,
+        "lost": 9,
+        "teamName": "Ð Ð¾ÑÑÐ¸ÑÐ½ÐºÐ°"
+      },
+      {
+        "played": 14,
+        "position": 7,
+        "points": 7,
+        "won": 2,
+        "goalsFor": 5,
+        "goalsAgainst": 25,
+        "drawn": 1,
+        "lost": 11,
+        "teamName": "ÐÐ½Ð¸ÑÐµÐ¹"
+      },
+      {
+        "played": 14,
+        "position": 8,
+        "points": 6,
+        "won": 1,
+        "goalsFor": 11,
+        "goalsAgainst": 28,
+        "drawn": 3,
+        "lost": 10,
+        "teamName": "ÐÐ¾Ð½ÑÐ°Ð½ÐºÐ°"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  },
+  {
+    "seasonId": "170439",
+    "seasonName": "2016",
+    "teams": [
+      {
+        "played": 15,
+        "position": 1,
+        "points": 35,
+        "won": 11,
+        "goalsFor": 25,
+        "goalsAgainst": 9,
+        "drawn": 2,
+        "lost": 2,
+        "teamName": "Ð Ð¾ÑÑÐ¸ÑÐ½ÐºÐ°"
+      },
+      {
+        "played": 15,
+        "position": 2,
+        "points": 26,
+        "won": 8,
+        "goalsFor": 24,
+        "goalsAgainst": 13,
+        "drawn": 2,
+        "lost": 5,
+        "teamName": "ÐÐ²ÐµÐ·Ð´Ð°-2005"
+      },
+      {
+        "played": 15,
+        "position": 3,
+        "points": 25,
+        "won": 7,
+        "goalsFor": 21,
+        "goalsAgainst": 18,
+        "drawn": 4,
+        "lost": 4,
+        "teamName": "Ð ÑÐ·Ð°Ð½Ñ-ÐÐÐ"
+      },
+      {
+        "played": 15,
+        "position": 4,
+        "points": 21,
+        "won": 6,
+        "goalsFor": 20,
+        "goalsAgainst": 18,
+        "drawn": 3,
+        "lost": 6,
+        "teamName": "Ð§ÐµÑÑÐ°Ð½Ð¾Ð²Ð¾"
+      },
+      {
+        "played": 15,
+        "position": 5,
+        "points": 15,
+        "won": 4,
+        "goalsFor": 17,
+        "goalsAgainst": 25,
+        "drawn": 3,
+        "lost": 8,
+        "teamName": "ÐÐ¤Ð Ð¦Ð¡ÐÐ"
+      },
+      {
+        "played": 15,
+        "position": 6,
+        "points": 5,
+        "won": 1,
+        "goalsFor": 13,
+        "goalsAgainst": 37,
+        "drawn": 2,
+        "lost": 12,
+        "teamName": "ÐÑÐ±Ð°Ð½Ð¾ÑÐºÐ°"
+      }
+    ],
+    "tournamentId": "191751",
+    "tournament": "Суперлига"
+  }
+]

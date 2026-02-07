@@ -47,7 +47,7 @@ export function Hero({ upcomingMatch }: HeroProps) {
             variant="secondary"
             className="mb-6 bg-[var(--cska-red)] text-white hover:bg-[var(--cska-red)]/90 text-sm px-4 py-2"
           >
-            Сезон 2025/2026
+            Сезон 2026
           </Badge>
 
           {/* Main Heading with Gradient Text */}

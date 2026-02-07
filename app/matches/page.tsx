@@ -19,14 +19,14 @@ export const metadata: Metadata = {
 }
 
 interface MatchesPageProps {
-  searchParams: {
+  searchParams: Promise<{
     page?: string
     tournament?: string
     season?: string
     status?: string
     isHome?: string
     opponent?: string
-  }
+  }>
 }
 
 function MatchesListSkeleton() {
@@ -84,23 +84,17 @@ async function MatchesContent({ searchParams }: MatchesPageProps) {
       <MatchFilters
         tournaments={tournaments}
         seasons={seasons}
-        filters={{
-          tournament: params.tournament,
-          season: params.season,
-          status: params.status as MatchStatus | undefined,
-          isHome: params.isHome === "true" ? true : params.isHome === "false" ? false : undefined,
-          opponent: params.opponent,
-        }}
       />
 
       {/* Список матчей */}
-      <MatchesList matches={matches} isLoading={false} />
+      <MatchesList matches={matches} />
 
       {/* Пагинация */}
       {pagination.totalPages > 1 && (
         <MatchPagination
           currentPage={pagination.page}
           totalPages={pagination.totalPages}
+          total={pagination.total}
         />
       )}
 

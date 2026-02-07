@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { ArrowLeft } from 'lucide-react'
 import { playersService } from '@/lib/services/players.service'
 import { Button } from '@/components/ui/button'
-import { PlayerStats } from '@/components/players/player-stats'
+import { PlayerDetailedStats } from '@/components/players/player-detailed-stats'
 import { StripedPattern } from '@/components/ui/striped-pattern'
 
 interface PlayerPageProps {
@@ -164,7 +164,7 @@ export default async function PlayerPage({ params }: PlayerPageProps) {
 
         {/* Statistics Section */}
         <div className="relative">
-          <PlayerStats stats={player.stats} position={player.position} />
+          <PlayerDetailedStats stats={player.stats} position={player.position} />
         </div>
       </div>
     </div>

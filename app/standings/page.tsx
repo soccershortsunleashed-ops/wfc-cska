@@ -3,6 +3,7 @@ import { standingsService } from '@/lib/services/standings.service'
 import { StandingsTable } from '@/components/standings/standings-table'
 import { StandingsFilters } from '@/components/standings/standings-filters'
 import { Container } from '@/components/layout/container'
+import { getTeamLogoUrl } from '@/lib/utils/team-utils'
 
 export const metadata: Metadata = {
   title: 'Турнирная таблица | ЖФК ЦСКА',
@@ -19,13 +20,20 @@ interface StandingsPageProps {
 export default async function StandingsPage({ searchParams }: StandingsPageProps) {
   const params = await searchParams
   const tournament = params.tournament || 'Суперлига'
-  const season = params.season || '2025/2026'
+  const season = params.season || '2026'
 
   const [standings, tournaments, seasons] = await Promise.all([
     standingsService.getStandings({ tournament, season }),
     standingsService.getTournaments(),
     standingsService.getSeasons(),
   ])
+
+  // Преобразуем данные для обратной совместимости
+  const standingsWithLogos = standings.map((standing) => ({
+    ...standing,
+    teamName: standing.team?.name || standing.teamName || 'Неизвестно',
+    teamLogoUrl: standing.team ? getTeamLogoUrl(standing.team) : standing.teamLogoUrl,
+  }))
 
   return (
     <main className="min-h-screen py-8">
@@ -44,7 +52,7 @@ export default async function StandingsPage({ searchParams }: StandingsPageProps
           currentSeason={season}
         />
 
-        <StandingsTable standings={standings} />
+        <StandingsTable standings={standingsWithLogos} />
       </Container>
     </main>
   )
